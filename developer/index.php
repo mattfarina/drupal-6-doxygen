@@ -18,8 +18,8 @@
  *   - @link search Search system @endlink
  *   - @link node_access Node access system @endlink
  *   - @link themeable Theme system @endlink
- *   - @link /api/constants Constants @endlink
- *   - @link /api/globals Global variables @endlink
+ *   - <a href="http://api.drupal.org/api/constants">Constants</a>
+ *   - <a href="http://api.drupal.org/api/globals">Global variables</a>
  * - Example modules
  *   - @link block_example.module How to define blocks @endlink
  *   - @link filter_example.module How to define a content filter @endlink
