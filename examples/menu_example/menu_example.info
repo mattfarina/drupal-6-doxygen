@@ -1,0 +1,12 @@
+; $Id: menu_example.info,v 1.1.2.2 2010/07/20 04:34:30 rfay Exp $
+name = Menu example
+description = An example of advanced uses of the menu APIs.
+package = Example modules
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-09-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "examples"
+datestamp = "1284466109"
+

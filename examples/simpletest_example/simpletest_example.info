@@ -1,0 +1,14 @@
+; $Id: simpletest_example.info,v 1.1.2.3 2010/05/07 01:47:53 rfay Exp $
+name = SimpleTest Example
+description = Used to demonstrate the SimpleTest test suite.
+core = 6.x
+package = Example modules
+files[] = simpletest_example.module
+files[] = simpletest_example.test
+
+; Information added by drupal.org packaging script on 2010-09-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "examples"
+datestamp = "1284466109"
+

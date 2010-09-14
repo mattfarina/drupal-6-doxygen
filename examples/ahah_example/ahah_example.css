@@ -1,0 +1,11 @@
+/* hide the next button when not degrading to non-javascript browser */
+html.js .next-button { 
+  display: none; 
+}
+
+
+/* Make the next/choose button align to the right of the select control */
+#edit-master-dropdown-wrapper {
+  display: inline-block;
+}
+

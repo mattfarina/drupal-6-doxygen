@@ -1,0 +1,12 @@
+; $Id: ahah_example.info,v 1.1.2.1 2009/10/30 19:03:10 rfay Exp $
+name = AHAH Example
+description = Demonstrate Drupal AHAH forms
+package = Example modules
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-09-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "examples"
+datestamp = "1284466109"
+

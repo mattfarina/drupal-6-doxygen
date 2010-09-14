@@ -1,0 +1,40 @@
+<?php
+// $Id: nodeapi_example.install,v 1.1.2.1 2009/10/14 23:51:34 jhodgdon Exp $
+
+/**
+ * @file
+ * Nodeapi example module's install and uninstall code.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function nodeapi_example_install() {
+  drupal_install_schema('nodeapi_example');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function nodeapi_example_uninstall() {
+  drupal_uninstall_schema('nodeapi_example');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function nodeapi_example_schema() {
+  $schema['nodeapi_example'] = array(
+    'fields' => array(
+      'nid'    => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'rating' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  return $schema;
+}
+
+function nodeapi_example_update_1() {
+  return _system_update_utf8(array('nodeapi_example'));
+}
