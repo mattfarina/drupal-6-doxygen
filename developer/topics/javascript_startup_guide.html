@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- $Id: javascript_startup_guide.html,v 1.7.2.3 2009/09/28 15:35:07 jhodgdon Exp $ -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>JavaScript Startup Guide</title>
+<style type="text/css">
+/*<![CDATA[*/
+h2 {
+  border-bottom: 100% dashed 1px;
+}
+h3 {
+  background-color: #dfedf7;
+}
+td {
+  text-align: center;
+}
+.help {
+  background-color: #ffc;
+}
+.verified {
+  background-color: #CFC;
+}
+/*]]>*/
+/* // There is no way to insert additional css but inline :(
+.ccomment {color: #5252F8}
+.drupal {color: #107FC3}
+.js {color: #FF1C00}
+.dom {color: #087109}
+.jquery {color: #BAB405}
+.module {color: #14805E; font-weight: bold;}
+cite {font-size: 80%};
+*/
+</style>
+</head>
+
+<body>
+
+  <h1>JavaScript Startup Guide</h1>
+
+  <h2>Content</h2>
+  <ol>
+    <li><a href="#difficulties">Three difficulties in learning JavaScript for Drupal</a>
+      <ol>
+        <li><a href="#documentation">Lack of documentation</a></li>
+        <li><a href="#oop">Object Orientated Programming (OOP)</a></li>
+        <li><a href="#different-apis">Many APIs: who does what?</a></li>
+          <ol>
+            <li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#dom">Document Object Model (DOM)</a></li>
+            <li><a href="#jquery">jQuery</a></li>
+            <li><a href="#drupal-js">Drupal JavaScript</a></li>
+            <li><a href="#drupal-fapi">Drupal Form API</a></li>
+          </ol>
+      </ol>
+    </li>
+    <li><a href="#examples">Examples</a>
+      <ol>
+        <li><a href="#jsEnabled">Drupal.jsEnabled</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ol>
+    </li>
+    <li><a href="#drupal-js-api">Drupal JavaScript API</a>
+      <ol>
+        <li><a href="#Drupal.behaviors">Drupal.behaviors</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <h2 id="difficulties">Three difficulties in learning JavaScript for Drupal</h2>
+
+  <p>There are three main difficulties that an inexperienced developer faces when trying to understand JavaScript as used in Drupal:
+    <ol>
+      <li>The lack of documentation,</li>
+      <li>The OOP style of programming,</li>
+      <li>The confusion between all the different elements and API involved.</li>
+    </ol>
+  Each element is detailled below.
+  </p>
+  
+  <h3 id="documentation">1- Lack of documentation</h3>
+
+  <p>First and foremost, the lack of documentation has made Drupal's JavaScript code difficultly accessible to the inexperienced developer. This document is an attempt at filling a little a huge gap.</p>
+  <p>Also, this site (<a href="http://api.drupal.org/">api.drupal.org</a>) uses the <a href="http://drupal.org/project/api">api.module</a> to automatically extract the documentation from the source code in order to present it here. Unfortunately, the API parser works only on PHP code. A <a href="http://drupal.org/node/25901">parser for JavaScript code</a> is needed. If you are good at this kind of stuff, your help will be appreciated.</p>
+  
+  <p>Lastly, some .js files in Drupal core and in contrib modules could do with a bit more in-code documentation. Patches are welcome.</p>
+
+
+  
+  <h3 id="oop">2- Object Orientated Programming (OOP)</h3>
+  <p>The second difficulty concerns the programmer who is mostly self-taught, with little or no formal training in programming, and who knows only HTML and PHP as used within Drupal. Other programmers, the professionals, those who have learned other computer languages using OOP (like C, C++, Java, etc.) would already be familiar with OOP.</p>
+  <p>While PHP <em>does</em> support OOP, the fact is that <a href="oop.html">Drupal does not use OOP</a>. So a programmer who has learned only as much PHP as necessary to program for Drupal may find the OOP in JavaScript confusing.</p>
+  <p>Indeed, the very first line of JavaScript code in Drupal core, in <a href="http://cvs.drupal.org/viewvc.py/drupal/drupal/misc/drupal.js">drupal.js</a>, is an Object declaration:</p>
+  
+  <p><code>var Drupal = Drupal || { 'settings': {}, 'behaviors': {}, 'themes': {}, 'locale': {} };</code></p>
+  <p>In this code, <code>Drupal</code> is an Object declared to be equal to itself, or, if not yet set, equal to <code>{ 'settings': {}, 'behaviors': {}, 'themes': {}, 'locale': {} }</code> which is an Object containing 4 methods (<code>settings</code>, <code>behaviors</code>, <code>themes</code>, and <code>locale</code>) each of which is itself an Object. This line of code is an <a href="http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide:Creating_New_Objects:Using_Object_Initializers">Object Initializer</a>. </p>
+  <p>So, if you find yourself unfamiliar with Object Oriented Programming, you need to learn a bit more on the topic in order to understand what follows. See in particular the following:
+  <ul>
+    <li><a href="http://php.net/manual/en/language.oop5.php">Classes and Objects (PHP 5)</a></li>
+    <li><a href="http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide:Working_with_Objects">Core JavaScript 1.5 Guide:Working with Objects</a></li>
+    <li><a href="http://en.wikipedia.org/wiki/Object-oriented_programming">Object-oriented programming (Wikipedia)</a></li>
+  </ul>
+  </p>
+  
+  <h3 id="different-apis">3- Many APIs: who does what?</h3>
+  <p>Maybe the major problem in understanding the JavaScript code found within Drupal is because there is not <em>one language</em> (JavaScript), but many different APIs and Specifications involved. Within a <code>.js</code> file, there could be DOM components and Drupal Form API elements tied together with JavaScript, jQuery, some core Drupal JavaScript Objects and functions, as well as the module's own JavaScript code and HTML markup. The real difficulty is understanding what does what. This section is about clarifying a bit this big mess.</p>
+  
+  <h4 id="javascript">JavaScript</h4>
+  <p>For an experienced PHP devoloper, reading the <a href="http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide">Core JavaScript 1.5 Guide</a> can be both easy and frustrating.</p>
+  
+  <p>
+  The JavaScript language is easy to understand because it is very similar to PHP.
+  There are some important and obvious differences, like the operator used for <a href="http://en.wikipedia.org/wiki/Concatenation">concatenation</a>: php uses the <a href="http://php.net/manual/en/language.operators.string.php">dot</a> (full stop), while JavaScript, as should be obvious by reading any js code, uses the <a href="http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide:Operators:String_Operators">+ sign</a>.
+  Other than that, JavaScript and PHP are both dynamically typed language (i.e. without <a href"http://en.wikipedia.org/wiki/Strongly-typed_programming_language">strong typing</a> like in C++), and share many language structures.
+  As noted above, Javascript code makes heavy use of OOP. 
+  It is still recommended to have at least a quick read through the available <a href="http://developer.mozilla.org/en/docs/JavaScript">documentation</a>.
+  </p>
+  
+  <p>
+  The frustrating part is that reading the documentation does not seem to answer any of the questions that prompted us to read it in the first place.
+  The fact is, for a php developer, JavaScript is easy to understand. What we have a problem with is not it, but the other elements involved in js code.
+  </p>
+
+  <h4 id="dom">Document Object Model (DOM)</h4>
+  <p>JavaScript uses the DOM to manipulate elements in the web page. 
+  This Document Object is the reason why JavaScript programming in inherently <a href="#oop">Object Oriented</a>.
+  In short, the object in question is your browser window, the top element of which is the &lt;html&gt; tag. 
+  The HTML DOM will create the object called <code>document</code> which you will find in many js code.
+  </p>
+  
+  <p>Rather than repeating what has been better said elsewhere, here is a list of important resources about the DOM specifications and its relationship with JavaScript.
+  It is recommended that you become fairly familiar with at least the general content of the following documents:
+  <ul>
+    <li>The official DOM documentation at the W3C:
+      <ul>
+        <li><a href="http://www.w3.org/DOM/">Document Object Model (DOM)</a>: the DOM homepage. </li>
+        <li><a href="http://www.w3.org/DOM/DOMTR">Document Object Model (DOM) Technical Reports</a>: the list of DOM specifications.</li>
+        <li><a href="http://www.w3.org/TR/REC-DOM-Level-1/">Document Object Model (DOM) Level 1 Specification</a>: chapter one deals with the basic DOM specs for any document. Chapter two covers more specifically a HTML document. </li>
+        <li><a href="http://www.w3.org/DOM/DOMTR.html#dom2">Document Object Model Level 2</a>: 6 documents in total. 
+          See in particular the <a href="http://www.w3.org/TR/DOM-Level-2-HTML/">DOM Level 2 HTML Specification</a> and the <a href="http://www.w3.org/TR/DOM-Level-2-Events/">DOM Level 2 Events Specification</a>.
+          In them, you will find the specs for many methods that you would have encountered in most js code.
+        </li>
+      </ul>
+    <li>DOM and Javascript:
+      <ul>
+        <li><a href="http://developer.mozilla.org/en/docs/DOM">DOM</a>: the DOM section at mozilla.org.
+          They write: 
+          <cite style="font-size: 80%">The Document Object Model (DOM) is an API for HTML and XML documents. 
+            It provides a structural representation of the document, enabling you to modify its content and visual presentation. 
+            Essentially, it connects web pages to scripts or programming languages.</cite> 
+          <strong>The DOM is what connects the js code to your HTML page.</strong>
+        </li>
+        <li><a href="http://developer.mozilla.org/en/docs/The_DOM_and_JavaScript">The DOM and JavaScript</a>: a simple introduction to help differenciate both topics.</li>
+        <li><a href="http://developer.mozilla.org/en/docs/Gecko_DOM_Reference">Gecko DOM Reference</a>: this document is important.
+        It covers all the different properties and methods of the document Object, as used in Gecko browsers, and other complient browsers (i.e. almost any browser!).
+        </li>
+      </ul>
+    </li>
+  </ul>
+  </p>
+
+  <h4 id="jquery">jQuery</h4>
+  <p>jQuery enhances JavaScript and the DOM by adding new methods to the document object. 
+  Understanding the jQuery documentation assumes that you have a fair grasp of both <a href="#oop">Object Oriented Programming</a> and the <a href="#dom">DOM</a>. 
+  Do not proceed further if you are still unclear about either.</p>
+  <p>Here are some useful links:
+    <ul>
+      <li><a href="http://docs.jquery.com/">jQuery documentation</a>. See links in the API Reference section for specific topics.</li>
+    </ul>
+  </p>
+  <p>When reading example code is the Tutorials section, it help to try figuring out which parts of the code are JavaScript constructs, which are DOM specs implementations, and which are jQuery extensions.
+  </p>
+
+  <h4 id="drupal-js">Drupal JavaScript</h4>
+  <p>Building up on all the previous elements, core Drupal js files create a <code>Drupal</code> Object with a few methods that modules can use, like <code>Drupal.behaviors</code>, <code>Drupal.settings</code>, etc. Those will be covered in more details below.</p>
+  <p></p>
+
+  <h4 id="drupal-fapi">Drupal Form API</h4>
+  <p>More often than not, JavaScript is used within Drupal to enhance the forms' User Interface. 
+  </p>
+  <p>In order to make the most of Drupal js, we can use some FORM API attributes, like <a href="forms_api_reference.html#ahah">#ahah</a>. Details to come.</p>
+
+
+  <h2 id="examples">Examples</h2>
+  <p>As we have seen, js code is a mix of <a href="#different-apis">different APIs and Specifications</a>.
+  We are now going to provide some examples to show how tightly integrated those different parts are.
+  </p>
+  <h3 id="jsEnabled">Drupal.jsEnabled</h3>
+  <div class="codeblock"><code>
+      <span class="js" style="color: #FF1C00">if (</span><span class="drupal" style="color: #107FC3">Drupal</span><span class="js" style="color: #FF1C00">.</span><span class="drupal" style="color: #107FC3">jsEnabled</span><span class="js" style="color: #FF1C00">) {</span> <br />
+      &nbsp;&nbsp; <span class="ccomment" style="color: #5252F8">// Global Killswitch on the &lt;html&gt; element </span><br />
+      &nbsp;&nbsp; <span class="dom" style="color: #087109">document.documentElement.className</span> <span class="js" style="color: #FF1C00">= '</span>js<span class="js" style="color: #FF1C00">';</span><br />
+    &nbsp;&nbsp; <span class="ccomment" style="color: #5252F8">// 'js enabled' cookie</span><br />
+    &nbsp;&nbsp; <span class="dom" style="color: #087109">document.cookie</span> <span class="js" style="color: #FF1C00">= '</span>has_js=1; path=/<span class="js" style="color: #FF1C00">';</span><br />
+    &nbsp;&nbsp; <span class="ccomment" style="color: #5252F8">// Attach all behaviors.</span><br />
+    &nbsp;&nbsp; <span class="jquery" style="color: #BAB405">$(</span><span class="dom" style="color: #087109">document</span><span class="jquery" style="color: #BAB405">).ready(</span><span class="drupal" style="color: #107FC3">Drupal</span><span class="js" style="color: #FF1C00">.</span><span class="drupal" style="color: #107FC3">attachBehaviors</span><span class="jquery" style="color: #BAB405">)</span><span class="js" style="color: #FF1C00">;</span><br />
+    <span class="js" style="color: #FF1C00">}</span><br />
+  </code></div>
+  <p>In this block of code we have:
+    <ul>
+      <li><span class="js" style="color: #FF1C00">JavaScript language</span>: <ul>
+        <li>you can recognize a simple <span class="js" style="color: #FF1C00">if() {}</span> structure control, the semi-column "<span class="js" style="color: #FF1C00">;</span>" at the end of lines, etc.</li>
+        <li>What is different compared to PHP is the dot (<span class="js" style="color: #FF1C00">.</span>) used in Objects where PHP would use <code>-&gt;</code>, as in a node object (e.g. <code>$node->nid</code>).</li>
+      </ul></li>
+      <li><span class="ccomment" style="color: #5252F8">Comments</span>, much like in PHP.</li>
+      <li><span class="dom" style="color: #087109">DOM elements</span>: <ul> 
+        <li>The <span class="dom" style="color: #087109">document</span> is a <a href="http://developer.mozilla.org/en/docs/The_DOM_and_JavaScript#The_DOM_and_JavaScript_-_What_is_doing_what.3F">Javascript implementation</a> of the Document interface as defined in the <a href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html">core DOM Level 1</a> specifications: <cite style="font-size: 80%">The Document interface is the first interface defined in the DOM1 Core, and document is a host object implementing the Document interface.</cite></li>
+        <li><span class="dom" style="color: #087109">documentElement</span> is a <a href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#attribute-documentElement">core DOM attribute</a>: <cite style="font-size: 80%">This is a convenience attribute that allows direct access to the child node that is the root element of the document. For HTML documents, this is the element with the tagName "HTML".</cite></li>  
+        <li><span class="dom" style="color: #087109">className</span> is the <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-95362176">class attribute</a> of the element: <cite style="font-size: 80%">This attribute has been renamed due to conflicts with the "class" keyword exposed by many languages.</cite>. 
+        What the line <code><span class="dom" style="color: #087109">document.documentElement.className</span> <span class="js" style="color: #FF1C00">= '</span>js<span class="js" style="color: #FF1C00">';</span></code> does, is add the class 'js' to the element  &lt;html&gt;, so that in effect we have <code>&lt;html class="js" &gt; </code>.</li>
+        <li><span class="dom" style="color: #087109">cookie</span> is yet another <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-8747038">DOM attribute</a>.</li>
+      </ul>
+      </li>
+      <li><span class="jquery" style="color: #BAB405">jQuery</span>: <ul>
+        <li><span class="jquery" style="color: #BAB405">$(</span><span class="dom" style="color: #087109">document</span><span class="jquery" style="color: #BAB405">)</span>  is a jQuery selector. In this case, it selects the whole document. 
+        As explained in the <a href="http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery#Hello_jQuery">tutorial</a>: <cite style="font-size: 80%">$ is an alias for the jQuery "class", therefore $() constructs a new jQuery object.</cite> </li>
+            <li><span class="jquery" style="color: #BAB405">ready()</span> is a jQuery <a href="http://docs.jquery.com/Events">event function</a>. </li>
+      </ul></li>
+      <li><span class="drupal" style="color: #107FC3">Drupal</span>: <ul>     
+        <li><span class="drupal" style="color: #107FC3">Drupal</span> is the object we discussed <a href="#oop">above</a></li>
+        <li><span class="drupal" style="color: #107FC3">jsEnabled</span> is the present function. If we manage to use JavaScript to add the class "js" to the html element, then we know the browser has JavaScript enabled :).</li>
+        <li><span class="drupal" style="color: #107FC3">attachBehaviors</span>: in PHP, we would have 
+        <code><font color="#000000"><font color="#0000BB">&lt;?php module_invoke_all</font><font color="#007700">(</font><font color="#DD0000">'Behaviors'</font><font color="#007700">);</font><font color="#0000BB">?&gt;</font></font></code>. 
+        <span class="drupal" style="color: #107FC3">attachBehaviors</span> is a method of the Object <span class="drupal" style="color: #107FC3">Drupal</span> which calls all the Behavior functions declared by modules.
+        </li>
+      </ul></li>
+    </ul>
+  </p>
+  <h3 id="conclusion">Conclusion</h3>
+
+  <p>If you have some difficulty understanding some js code, your first task is to figure out what API is defining the part you don't understand. Is is a DOM complient method? A jQuery method? a Drupal one? Is it the Object Oriented Programming style? Or the way jQuery objects are bound together in a long succession of methods?</p>
+  <p>If you can identify what troubles you, then finding the solution becomes easier, because you know in which documentation to look.</p>
+
+  <h2 id="drupal-js-api">Drupal JavaScript API</h2>
+  <p>This section is to be completed... If you want to give a hand, please do! :)</p>
+
+  <h3 id="Drupal.behaviors">Drupal.behaviors</h3>
+  <p>When most of us learn jQuery for the first time, we learn to put all our code inside the $(document).ready function, like this:</p>
+  <code>
+  $(document).ready(function(){<br />
+    // do some fancy stuff<br />
+  });
+  </code>
+  <p>This ensures that our code will get run as soon as the DOM has loaded, manipulating elements and binding behaviours to events as per our instructions. However, as of Drupal 6, we don't need to include the $(document).ready() function in our jQuery code at all. Instead we put all our code inside a function that we assign as a property of Drupal.behaviors. The Drupal.behaviors object is itself a property of the Drupal object, as explained above, and when we want our module to add new jQuery behaviours, we simply extend this object. The entire jQuery code for your module could be structured like this:</p>
+  <code>
+  Drupal.behaviors.myModuleBehavior = function (context) {<br />
+    //do some fancy stuff<br />
+  };
+  </code>
+  <p>drupal.js has a $(document).ready() function which calls the Drupal.attachBehaviors function, which in turn cycles through the Drupal.behaviors object calling every one of its properties, these all being functions declared by various modules as above, and passing in the document as the context.</p>
+  <p>The reason for doing it this way is that if your jQuery code makes AJAX calls which result in new DOM elements being added to the page, you might want your behaviours (e.g. hiding all h3 elements or whatever) to be attached to that new content as well. But since it didn't exist when the DOM was loaded and Drupal.attachBehaviors ran it doesn't have any behaviours attached. With the above set-up, though, all you need to do is call Drupal.behaviors.myModuleBehavior(newcontext), where newcontext would be the new, AJAX-delivered content, thus ensuring that the behaviours don't get attached to the whole document all over again. There are full instructions on how to use this code on the  <a href="http://drupal.org/node/114774#javascript-behaviors">Converting 5.x modules to 6.x</a> page.</p>
+  
+  <p>This usage is not in fact exclusive to Drupal 6: the jstools package in Drupal 5 uses this exact pattern to control the behaviours of its modules - collapsiblock, tabs, jscalendar, etc.
+  </p>
+
+  <p></p>
+  <h3 id="Drupal.settings">Drupal.settings</h3>
+  <p></p>
+  <p></p>
+  <h3 id="Drupal.themes">Drupal.themes</h3>
+  <p></p>
+  <p></p>
+  <h3 id="Drupal.locale">Drupal.locale</h3>
+  <p></p>
+  <p></p>
+  
+</body>
+</html>

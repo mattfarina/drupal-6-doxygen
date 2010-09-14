@@ -1,0 +1,2141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- $Id: forms_api_reference.html,v 1.81.2.35 2010/05/19 16:10:46 rfay Exp $ -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>Forms API Reference</title>
+<style type="text/css">
+/*<![CDATA[*/
+h2 {
+  border-bottom: 100% dashed 1px;
+}
+h3 {
+  background-color: #dfedf7;
+}
+td {
+  text-align: center;
+}
+.help {
+  background-color: #ffc;
+}
+.x {
+  background-color: #dfedf7;
+}
+.verified {
+  background-color: #CFC;
+}
+.style1 {color: #0000bb}
+.style2 {color: #dd0000}
+.style3 {color: #007700}
+.def-txt {color: #000000}
+.r-txt {color: #DD0000}
+.g-txt {color: #007700}
+.b-txt {color: #0000BB}
+.y-txt {color: #FF8000}
+/*]]>*/
+</style>
+</head>
+
+<body>
+  <h1>Forms API Reference</h1>
+  <p>This document provides a programmer's reference to the Drupal Forms API. If you're interested in step-by-step documentation to help you write forms, please see the <a href="http://api.drupal.org/api/file/developer/topics/forms_api.html/6">Forms API QuickStart guide</a>.</p>
+  <p>Skip to: <a href="#properties">Properties</a> | <a href="#element_default_values">Default Values</a> | <a href="#elements">Elements</a></p>
+
+  <h2>Form Controls</h2>
+  <p><strong>Legend:</strong><br />
+  <strong>X</strong> = attribute can be used with this type<br />
+  <strong>-</strong> = this attribute is not applicable to this type</p>
+  <table border="1">
+    <tr>
+      <th scope="col"><a href="#type"><strong>#type</strong></a></th>
+      <th scope="col"><a href="#checkbox">checkbox</a></th>
+      <th scope="col"><a href="#checkboxes">checkboxes</a></th>
+      <th scope="col"><a href="#date">date</a></th>
+      <th scope="col"><a href="#fieldset">fieldset</a></th>
+      <th scope="col"><a href="#file">file</a></th>
+      <th scope="col"><a href="#password">password</a></th>
+      <th scope="col"><a href="#password_confirm">password_confirm</a></th>
+      <th scope="col"><a href="#radio">radio</a></th>
+      <th scope="col"><a href="#radios">radios</a></th>
+      <th scope="col"><a href="#select">select</a></th>
+      <th scope="col"><a href="#textarea">textarea</a></th>
+      <th scope="col"><a href="#textfield">textfield</a></th>
+      <th scope="col"><a href="#weight">weight</a></th>
+    </tr>
+    <tr>
+      <th scope="row"><a href="#access">#access</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#after_build">#after_build</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#ahah">#ahah</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#attributes">#attributes</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#autocomplete_path">#autocomplete_path</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#collapsed">#collapsed</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#collapsible">#collapsible</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#cols">#cols</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#default_value">#default_value</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#delta">#delta</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#description">#description</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#disabled">#disabled</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td><strong>-</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#element_validate">#element_validate</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#field_prefix">#field_prefix</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#field_suffix">#field_suffix</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#maxlength">#maxlength</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#multiple">#multiple</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#options">#options</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#parents">#parents</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#post_render">#post_render</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#prefix">#prefix</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#pre_render">#pre_render</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#process">#process</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#required">#required</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#resizable">#resizable</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#return_value">#return_value</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#rows">#rows</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td>-</td>  <!-- password -->
+      <td>-</td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td>-</td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td>-</td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#size">#size</a></th>
+      <td>-</td>  <!-- checkbox -->
+      <td>-</td>  <!-- checkboxes -->
+      <td>-</td>  <!-- date -->
+      <td>-</td>  <!-- fieldset -->
+      <td>-</td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td>-</td>  <!-- radio -->
+      <td>-</td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td>-</td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td>-</td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#suffix">#suffix</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#theme">#theme</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#title"><strong>#title</strong></a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#tree">#tree</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#weightval">#weight</a></th>
+      <td class="x"><strong>X</strong></td>  <!-- checkbox -->
+      <td class="x"><strong>X</strong></td>  <!-- checkboxes -->
+      <td class="x"><strong>X</strong></td>  <!-- date -->
+      <td class="x"><strong>X</strong></td>  <!-- fieldset -->
+      <td class="x"><strong>X</strong></td>  <!-- file -->
+      <td class="x"><strong>X</strong></td>  <!-- password -->
+      <td class="x"><strong>X</strong></td>  <!-- password_confirm -->
+      <td class="x"><strong>X</strong></td>  <!-- radio -->
+      <td class="x"><strong>X</strong></td>  <!-- radios -->
+      <td class="x"><strong>X</strong></td>  <!-- select -->
+      <td class="x"><strong>X</strong></td>  <!-- textarea -->
+      <td class="x"><strong>X</strong></td>  <!-- textfield -->
+      <td class="x"><strong>X</strong></td>  <!-- weight -->
+    </tr>
+  </table>
+
+  <h2>Special Elements</h2>
+  <table border="1">
+    <tr>
+      <th scope="col"><a href="#type">#</a><a href="#type">type</a></th>
+      <th scope="col"><a href="#button">button</a></th>
+      <th scope="col"><a href="#image_button">image_button</a></th>
+      <th scope="col"><a href="#submit">submit</a></th>
+      <th scope="col"><a href="#form">form</a></th>
+      <th scope="col"><a href="#hidden">hidden</a></th>
+      <th scope="col"><a href="#token">token</a></th>
+      <th scope="col"><a href="#markup">markup</a></th>
+      <th scope="col"><a href="#item">item</a></th>
+      <th scope="col"><a href="#val">value</a></th>
+    </tr>
+    <tr>
+      <th scope="row"><a href="#access">#access</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#action">#action</a></th>
+      <td>-</td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#after_build">#after_build</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#ahah">#ahah</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#attributes">#attributes</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#button_type">#button_type</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#default_value">#default_value</a></th>
+      <td>-</td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#description">#description</a></th>
+      <td>-</td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#disabled">#disabled</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#element_validate">#element_validate</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#executes_submit_callback">#executes_submit_callback</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#method">#method</a></th>
+      <td>-</td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#name">#name</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#parents">#parents</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#post_render">#post_render</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#prefix">#prefix</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#pre_render">#pre_render</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#process">#process</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#redirect">#redirect</a></th>
+      <td>-</td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#return_value">#return_value</a></th>
+      <td>-</td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#src">#src</a></th>
+      <td>-</td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#submit-prop">#submit</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#suffix">#suffix</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#theme">#theme</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#title"><strong>#title</strong></a></th>
+      <td>-</td><!-- button -->
+      <td>-</td><!-- image_button -->
+      <td>-</td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#tree">#tree</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#validate">#validate</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td class="x"><strong>X</strong></td><!-- form -->
+      <td>-</td><!-- hidden -->
+      <td>-</td><!-- token -->
+      <td>-</td><!-- markup -->
+      <td>-</td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#value">#value</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td class="x"><strong>X</strong></td><!-- value -->
+    </tr>
+    <tr>
+      <th scope="row"><a href="#weightval">#weight</a></th>
+      <td class="x"><strong>X</strong></td><!-- button -->
+      <td class="x"><strong>X</strong></td><!-- image_button -->
+      <td class="x"><strong>X</strong></td><!-- submit -->
+      <td>-</td><!-- form -->
+      <td class="x"><strong>X</strong></td><!-- hidden -->
+      <td class="x"><strong>X</strong></td><!-- token -->
+      <td class="x"><strong>X</strong></td><!-- markup -->
+      <td class="x"><strong>X</strong></td><!-- item -->
+      <td>-</td><!-- value -->
+    </tr>
+  </table>
+
+  <h2><a name="element_default_values" id="element_default_values"></a>Default Values</h2>
+  <p>Every element automatically has these default values (see _element_info):</p>
+  <ul>
+    <li><a href="#description">#description</a> = NULL</li>
+    <li><a href="#attributes">#attributes</a> = array()</li>
+    <li><a href="#required">#required</a> = FALSE</li>
+    <li><a href="#tree">#tree</a> = FALSE</li>
+    <li><a href="#parents">#parents</a> = array()</li>
+  </ul>
+  <p>The following is a list of default values which do not need to be set (found in system_elements):</p>
+  <ul>
+    <li>
+      <strong><a href="#button">button</a></strong>
+      <ul>
+        <li><a href="#name">#name</a> = 'op'</li>
+        <li><a href="#button_type">#button_type</a> = 'submit'</li>
+        <li><a href="#executes_submit_callback">#executes_submit_callback</a> = FALSE</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'mousedown' </li>
+      </ul>
+    </li>
+    <li>
+      <strong><a href="#checkbox">checkbox</a></strong>
+      <ul>
+        <li><a href="#return_value">#return_value</a> = 1</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'change' </li>
+      </ul>
+    </li>
+    <li>
+      <strong><a href="#checkboxes">checkboxes</a></strong>
+      <ul>
+        <li><a href="#tree">#tree</a> = TRUE</li>
+      </ul>
+    </li>
+    <li>
+      <a href="#fieldset"><strong>fieldset</strong></a>
+      <ul>
+        <li><a href="#collapsible">#collapsible</a> = FALSE</li>
+        <li><a href="#collapsed">#collapsed</a> = FALSE</li>
+      </ul>
+    </li>
+    <li>
+      <strong><a href="#file">file</a></strong>
+      <ul>
+        <li><a href="#size">#size</a> = 60</li>
+      </ul>
+    </li>
+    <li><strong><a href="#form">form</a></strong></li>
+    <li style="list-style: none">
+      <ul>
+        <li><a href="#method">#method</a> = 'post'</li>
+        <li><a href="#action">#action</a> = request_uri()</li>
+      </ul>
+    </li>
+    <li>
+      <strong><a href="#image_button">image_button</a></strong>
+      <ul>
+        <li><a href="#button_type">#button_type</a> = 'submit'</li>
+        <li><a href="#executes_submit_callback">#executes_submit_callback</a> = TRUE</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'mousedown' </li>
+      </ul>
+    </li>
+    <li><strong><a href="#radio">radio</a></strong></li>
+    <li style="list-style: none">
+      <ul>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'change' </li>
+      </ul>
+    </li>
+    <li><strong><a href="#password">password</a></strong></li>
+    <li style="list-style: none">
+      <ul>
+        <li><a href="#size">#size</a> = 60</li>
+        <li><a href="#maxlength">#maxlength</a> = 128</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'blur' </li>
+      </ul>
+    </li>
+    <li><strong><a href="#password_confirm">password_confirm</a></strong></li>
+    <li style="list-style: none">
+      <ul>
+        <li><a href="#size">#size</a> = 60</li>
+      </ul>
+    </li>
+    <li><strong><a href="#submit">submit</a></strong></li>
+    <li style="list-style: none">
+      <ul>
+        <li><a href="#name">#name</a> = 'op'</li>
+        <li><a href="#button_type">#button_type</a> = 'submit'</li>
+        <li><a href="#executes_submit_callback">#executes_submit_callback</a> = TRUE</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'mousedown' </li>
+      </ul>
+    </li>
+    <li>
+      <strong><a href="#textarea">textarea</a></strong>
+      <ul>
+        <li><a href="#cols">#cols</a> = 60</li>
+        <li><a href="#resizable">#resizable</a> = TRUE</li>
+        <li><a href="#rows">#rows</a> = 5</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'blur' </li>
+      </ul>
+    </li>
+    <li><strong><a href="#textfield">textfield</a></strong></li>
+    <li style="list-style: none">
+      <ul>
+        <li><a href="#size">#size</a> = 60</li>
+        <li><a href="#maxlength">#maxlength</a> = 128</li>
+        <li><a href="#autocomplete_path">#autocomplete_path</a> = FALSE</li>
+        <li><a href="#ahah_event">#ahah['event']</a> = 'blur' </li>
+      </ul>
+    </li>
+    <li>
+      <strong><a href="#weight">weight</a></strong>
+      <ul>
+        <li><a href="#delta">#delta</a> = 10</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>&nbsp;</p>
+
+  <h2><a name="elements" id="elements"></a>Elements</h2>
+  <p>Note that property names in <strong>bold</strong> are those that will generally need to be defined when creating this form element. Default values are indicated in parentheses next to property names, if they exist.</p>
+
+  <h3><a name="button" id="button"></a>button</h3>
+  <p><strong>Description</strong>: Format an action button. When the button is pressed, the form will be submitted to Drupal, where it is validated and rebuilt. The submit handler is not invoked.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#button_type">#button_type</a> (default: submit), <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#executes_submit_callback">#executes_submit_callback</a> (default: FALSE), <a href="#name">#name</a> (default: op),  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#submit-prop">#submit</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#validate">#validate</a>, <a href="#value"><strong>#value</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/node/node.module">node.module</a>):</p>
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'preview'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'button'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Preview'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">19,<br /></span><span class="g-txt">);<br /></span> <span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="checkbox" id="checkbox"></a>checkbox</h3>
+  <p><strong>Description</strong>: Format a checkbox.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#return_value"><strong>#return_value</strong></a> (default: 1), <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/contact/contact.module">contact.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'copy'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'checkbox'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt; t(</span><span class="r-txt">'Send me a copy.'</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="checkboxes" id="checkboxes"></a>checkboxes</h3>
+  <p><strong>Description</strong>: Format a set of checkboxes. #options is an associative array, where the key is the #return_value of the checkbox and the value is displayed. The #options array can not have a 0 key, as it would not be possible to discern checked and unchecked states.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#options"><strong>#options</strong></a>,  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree"><strong>#tree</strong></a> (default: TRUE), <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/node/node.module">node.module</a>):</p>
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'node_options_'</span><span class="g-txt">.</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">type</span><span class="g-txt">] = array(<br /></span></span></code> <code>&nbsp;&nbsp;<span class="def-txt"><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'checkboxes'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Default options'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">variable_get</span><span class="g-txt">(</span><span class="r-txt">'node_options_'</span><span class="g-txt">.</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">type,</span> <span class="g-txt">array(</span><span class="r-txt">'status'</span><span class="g-txt">,</span> <span class="r-txt">'promote'</span><span class="g-txt">)),<br /></span> &nbsp;&nbsp;<span class="r-txt">'#options'</span> <span class="g-txt">=&gt; array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp; 'status'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Published'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;'moderate'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'In moderation queue'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;'promote'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Promoted to front page'</span><span class="g-txt">),<br />
+    &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="r-txt">'sticky'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Sticky at top of lists'</span><span class="g-txt">),</span><span class="g-txt"><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="r-txt">'revision'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Create new revision'</span><span class="g-txt">)</span>,<span class="g-txt"><br />
+    &nbsp;&nbsp;),</span><span class="g-txt"><br /></span> &nbsp;&nbsp;<span class="r-txt">'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Users with the &lt;em&gt;administer nodes&lt;/em&gt; permission will be able to override these options.'</span><span class="g-txt">),<br />
+    );<br /></span> <span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="date" id="date"></a>date</h3>
+  <p><strong>Description</strong>: Format a date selection box. The #default_value will be today's date if no value is supplied. The format for the #default_value and the #return_value is an array with three elements with the keys: 'year', month', and 'day'. For example, <code><span class="g-txt">array(</span><span class="r-txt">'year'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">2007</span><span class="g-txt">,</span> <span class="r-txt">'month'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">2</span><span class="g-txt">,</span> <span class="r-txt">'day'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">15</span><span class="g-txt">)</span></code></p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/profile/profile.module">profile.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $fields</span><span class="g-txt">[</span><span class="b-txt">$category</span><span class="g-txt">][</span><span class="b-txt">$field</span><span class="g-txt">-&gt;</span><span class="b-txt">name</span><span class="g-txt">] = array(<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'date'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">check_plain</span><span class="g-txt">(</span><span class="b-txt">$field</span><span class="g-txt">-&gt;</span><span class="b-txt">title</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="b-txt">$field</span><span class="g-txt">-&gt;</span><span class="b-txt">name</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">_profile_form_explanation</span><span class="g-txt">(</span><span class="b-txt">$field</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#required'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$field</span><span class="g-txt">-&gt;</span><span class="b-txt">required<br /></span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="fieldset" id="fieldset"></a>fieldset</h3>
+  <p><strong>Description</strong>: Format a group of form items.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#collapsed"><strong>#collapsed</strong></a> (default: FALSE), <a href="#collapsible"><strong>#collapsible</strong></a> (default: FALSE), <a href="#description">#description</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/contact/contact.module">contact.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'contact'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'fieldset'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Contact settings'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">5</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#collapsible'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#collapsed'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">FALSE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="file" id="file"></a>file</h3>
+  <p><strong>Description</strong>: Format a file upload field.</p>
+  <p>Note: you will need to include <code>$form['#attributes'] = array('enctype' =&gt; "multipart/form-data");</code> in your form. See this handbook page for an example <a href="http://drupal.org/node/111782">http://drupal.org/node/111782</a>.</p>
+  <p>Note: the #required property is not supported (setting it to true will always cause a validation error). Instead, you may want to use your own validation function to do checks on the $_FILES array with #required set to false. You will also have to add your own required asterisk if you would like one.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#size"><strong>#size</strong></a> (default: 60), <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/upload/upload.module">upload.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'new'</span><span class="g-txt">][</span><span class="r-txt">'upload'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'file'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Attach new file'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">40,<br /></span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="form" id="form"></a>form</h3>
+  <p><strong>Description</strong>: A form containing form elements</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#action">#action</a> (default: request_uri()), <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#method">#method</a> (default: 'post'),  <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#redirect">#redirect</a>, <a href="#submit-prop">#submit</a>, <a href="#suffix">#suffix</a>,  <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#validate">#validate</a></p>
+  <p><strong>Usage example</strong>:</p>
+  <p class="help">N/A</p>
+
+  <h3><a name="hidden" id="hidden"></a>hidden</h3>
+  <p><strong>Description</strong>: Store data in a hidden form field.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#default_value">#default_value</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#value"><strong>#value</strong></a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/block/block.module">block.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'bid'</span><span class="g-txt">] = array(</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'hidden'</span><span class="g-txt">,</span> <span class="r-txt">'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$bid</span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+  <p>Note that if you plan to use JavaScript to change your <code>hidden</code> element's value, you will need to use the <code>#default_value</code> property rather than <code>#value</code>.</p>
+
+  <h3><a name="image_button" id="image_button"></a>image_button</h3>
+  <p><strong>Description</strong>: Format a form submit button with an image. Note: using multiple image_buttons with #value set will make the submission think the last defined was the $form_state['clicked_button'].</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#button_type">#button_type</a> (default: 'submit'), <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#executes_submit_callback">#executes_submit_callback</a> (default: TRUE), <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#return_value">#return_value</a> (default: TRUE), <a href="#src">#src</a>, <a href="#submit-prop">#submit</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#validate">#validate</a>, <a href="#value"><strong>#value</strong></a>, <a href="#weightval">#weight</a></p>
+
+  <h3><a name="item" id="item"></a>item</h3>
+  <p><strong>Description</strong>: Generate a display-only form element allowing for an optional title and description.</p>
+  <p>Note: since this is a read-only field, setting the <a href="#required">#required</a> property will do nothing except theme the form element to look as if it were actually required (i.e. by placing a red star next to the <a href="#title">#title</a>).</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#description">#description</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#required">#required</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#value"><strong>#value</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/head/file/modules/contact.module">contact.module</a>):</p>
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br /></span></span></code> <span class="style1"><code>$form[<span class="style2">'from'</span>] = <span class="style3">array(</span><br />
+    &nbsp;&nbsp;</code><code><span class="style2">'#type'</span> =&gt; <span class="style2">'item'</span>,<br />
+    &nbsp; <span class="style2">'#title'</span> =&gt; t(<span class="style2">'From'</span>),<br />
+    &nbsp; <span class="style2">'#value'</span> =&gt; $user-&gt;name .<span class="style2">' &amp;lt;'</span>. $user-&gt;mail .<span class="style2">'&amp;gt;'</span>,<br />
+    <span class="style3">);</span></code></span><code><span class="def-txt"><span class="g-txt"><br /></span> <span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="markup" id="markup"></a>markup</h3>
+  <p><strong>Description</strong>: Generate generic markup for display inside forms. Note that there is <strong>no need to declare a form element as #type = 'markup'</strong>, as this is the default type.</p>
+  <p>Note: if you use markup, if your content is not wrapped in tags (generally &lt;p&gt; or &lt;div&gt;), your content will fall outside of collapsed fieldsets.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#type">#type</a>, <a href="#value"><strong>#value</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/contact/contact.module">contact.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'contact_information'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">variable_get</span><span class="g-txt">(</span><span class="r-txt">'contact_form_information'</span><span class="g-txt">,</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'You can leave us a message using the contact form below.'</span><span class="g-txt">)),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="password" id="password"></a>password</h3>
+  <p><strong>Description</strong>: Format a single-line text field that does not display its contents visibly.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#maxlength"><strong>#maxlength</strong></a> (default: 128),  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#size"><strong>#size</strong></a> (default: 60), <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/user/user.module">user.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'pass'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'password'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Password'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">64</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">15</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="password_confirm" id="password_confirm"></a>password_confirm</h3>
+  <p><strong>Description</strong>: Format a pair of <a href="#password">password</a> fields, which do not validate unless the two entered passwords match.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#size"><strong>#size</strong></a> (default: 60), <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/user/user.module">user.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'pass'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'password_confirm'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Password'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">25</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="radio" id="radio"></a>radio</h3>
+  <p><strong>Description</strong>: Format a radio button.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#return_value">#return_value</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong>:</p>
+  <p class="help">N/A</p>
+
+  <h3><a name="radios" id="radios"></a>radios</h3>
+  <p><strong>Description</strong>: Format a set of radio buttons.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#options"><strong>#options</strong></a>,  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">comment.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'posting_settings'</span><span class="g-txt">][</span><span class="r-txt">'comment_preview'</span><span class="g-txt">] = array(<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'radios'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Preview comment'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">variable_get</span><span class="g-txt">(</span><span class="r-txt">'comment_preview'</span><span class="g-txt">,</span> <span class="b-txt">1</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt; array(</span><span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Optional'</span><span class="g-txt">),</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Required'</span><span class="g-txt">)),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="select" id="select"></a>select</h3>
+  <p><strong>Description</strong>: Format a drop-down menu or scrolling selection box.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#multiple"><strong>#multiple</strong></a>, <a href="#options"><strong>#options</strong></a>,  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#size">#size</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'feed'</span><span class="g-txt">][</span><span class="r-txt">'feed_item_length'</span><span class="g-txt">] = array(<br /></span> <span class="r-txt">&nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'select'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Display of XML feed items'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">variable_get</span><span class="g-txt">(</span><span class="r-txt">'feed_item_length'</span><span class="g-txt">,</span><span class="r-txt">'teaser'</span><span class="g-txt">),<br /></span> <span class="r-txt">&nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt; array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp; 'title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Titles only'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp; 'teaser'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Titles plus teaser'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;'fulltext'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Full text'</span><span class="g-txt">),<br />
+    &nbsp;&nbsp;),<br /></span> <span class="r-txt">&nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Global setting for the length of XML feed items that are output by default.'</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="submit" id="submit"></a>submit</h3>
+  <p><strong>Description</strong>: Format a form submit button.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#button_type">#button_type</a> (default: 'submit'), <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#executes_submit_callback">#executes_submit_callback</a> (default: TRUE), <a href="#name">#name</a> (default: 'op'),  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#submit-prop">#submit</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#validate">#validate</a>, <a href="#value"><strong>#value</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/locale/locale.module">locale.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'submit'</span><span class="g-txt">] = array(</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'submit'</span><span class="g-txt">,</span> <span class="r-txt">'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Import'</span><span class="g-txt">));<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="textarea" id="textarea"></a>textarea</h3>
+  <p><strong>Description</strong>: Format a multiple-line text field.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#cols"><strong>#cols</strong></a> (default: 60), <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#resizable">#resizable</a> (default: TRUE), <a href="#rows"><strong>#rows</strong></a> (default: 5), <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/forum/forum.module">forum.module</a>):</p>
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'body'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textarea'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Body'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">body</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#required'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE<br /></span></span></code><code><span class="def-txt"><span class="g-txt">);<br /></span> <span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="textfield" id="textfield"></a>textfield</h3>
+  <p><strong>Description</strong>: Format a single-line text field.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#ahah">#ahah</a>, <a href="#attributes">#attributes</a>, <a href="#autocomplete_path">#autocomplete_path</a> (default: FALSE), <a href="#default_value"><strong>#default_value</strong></a>, <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#field_prefix">#field_prefix</a>, <a href="#field_suffix">#field_suffix</a>, <a href="#maxlength"><strong>#maxlength</strong></a> (default: 128),  <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#size"><strong>#size</strong></a> (default: 60), <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/forum/forum.module">forum.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'title'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textfield'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Subject'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">title</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">128</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#required'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="token" id="token"></a>token</h3>
+  <p><strong>Description</strong>: Store token data in a hidden form field (generally used to protect against cross-site forgeries). A token element is automatically added to each Drupal form by drupal_prepare_form(), so you don't generally have to add one yourself.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#default_value">#default_value</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#value"><strong>#value</strong></a>, <a href="#weightval">#weight</a></p>
+
+  <h3><a name="val" id="val"></a>value</h3>
+  <p><strong>Description</strong>: A form value that is internal to the form and never displayed to the screen.</p>
+  <p><strong>Properties</strong>: <a href="#type"><strong>#type</strong></a>, <a href="#value"><strong>#value</strong></a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/node/node.module">node.module</a>):</p>
+  <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+  $form</span><span class="g-txt">[</span><span class="r-txt">'vid'</span><span class="g-txt">] =</span> <span class="b-txt">array</span><span class="g-txt">(</span><span class="r-txt">'#type'</span> =&gt; <span class="r-txt">'value'</span><span class="g-txt">,</span> <span class="r-txt">'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node-&gt;vid</span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code></p>
+<p>Note that as of Drupal 6, you can also simply store arbitrary variables in <code>$form['#foo']</code> instead, as long as <code>'#foo'</code> does not conflict with any other internal property of the Form API.</p>
+
+  <h3><a name="weight" id="weight"></a>weight</h3>
+  <p><strong>Description</strong>: Format a weight selection menu.</p>
+  <p><strong>Properties</strong>: <a href="#access">#access</a>, <a href="#after_build">#after_build</a>, <a href="#attributes">#attributes</a>, <a href="#default_value"><strong>#default_value</strong></a>, <a href="#delta"><strong>#delta</strong></a> (default: 10), <a href="#description">#description</a>, <a href="#disabled">#disabled</a>, <a href="#element_validate">#element_validate</a>, <a href="#parents">#parents</a>, <a href="#post_render">#post_render</a>, <a href="#prefix">#prefix</a>, <a href="#pre_render">#pre_render</a>, <a href="#process">#process</a>, <a href="#required">#required</a>, <a href="#suffix">#suffix</a>, <a href="#theme">#theme</a>, <a href="#title"><strong>#title</strong></a>, <a href="#tree">#tree</a>, <a href="#type"><strong>#type</strong></a>, <a href="#weightval">#weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/menu/menu.module">menu.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'weight'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'weight'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Weight'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'weight'</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#delta'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">10</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Optional. In the menu, the heavier items will sink and the lighter items will be positioned nearer the top.'</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h2><a name="properties" id="properties"></a>Properties</h2>
+
+  <h3><a name="access" id="access"></a>#access</h3>
+  <p><strong>Used by</strong>: All elements and forms</p>
+  <p><strong>Description</strong>: Whether the element is accessible or not; when FALSE, the element is not rendered and the user submitted value is not taken into consideration.</p>
+  <p><strong>Values</strong>: TRUE or FALSE.</p>
+
+  <h3><a name="action" id="action"></a>#action</h3>
+  <p><strong>Used by</strong>: <a href="#form">form</a></p>
+  <p><strong>Description</strong>: The path to which the form will be submitted.</p>
+  <p><strong>Values</strong>: An internal path</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/comment/comment.module">comment.module</a>):</p>
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'#action'</span><span class="g-txt">] =</span> <span class="b-txt">url</span><span class="g-txt">(</span><span class="r-txt">'comment/reply/'</span><span class="g-txt">.</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'nid'</span><span class="g-txt">]);<br /></span> <span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="after_build" id="after_build"></a>#after_build</h3>
+  <p><strong>Used by</strong>: All elements and forms</p>
+  <p><strong>Description</strong>: An array of function names which will be called after the form or element is built.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>):</p>
+<p><strong>Note:</strong> If you are altering an existing form via hook_form_alter() or a similar means, be careful with this property! You will probably want to add to the existing array rather than writing over it, so don't follow this usage example exactly.</p>
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'files'</span><span class="g-txt">][</span><span class="r-txt">'file_directory_path'</span><span class="g-txt">] = array(<br /></span> <span class="r-txt">&nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textfield'</span><span class="g-txt">,<br /></span> <span class="r-txt"><code><span class="def-txt"><span class="r-txt">&nbsp;&nbsp;</span></span></code>'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'File system path'</span><span class="g-txt">),<br /></span> <span class="r-txt"><code><span class="def-txt"><span class="r-txt">&nbsp;&nbsp;</span></span></code>'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">file_directory_path</span><span class="g-txt">(),<br /></span> <span class="r-txt"><code><span class="def-txt"><span class="r-txt">&nbsp;&nbsp;</span></span></code>'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">255</span><span class="g-txt">,<br /></span> <span class="r-txt"><code><span class="def-txt"><span class="r-txt">&nbsp;&nbsp;</span></span></code>'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'A file system path where the files will be stored. This directory has to exist and be writable by Drupal. If the download method is set to public this directory has to be relative to Drupal installation directory, and be accessible over the web. When download method is set to private this directory should not be accessible over the web. Changing this location after the site has been in use will cause problems so only change this setting on an existing site if you know what you are doing.'</span><span class="g-txt">),<br />
+    );</span><br />
+    <span class="b-txt">$form</span><span class="g-txt">[</span><span class="r-txt">'#after_build'</span><span class="g-txt">] = array(<span class="r-txt">'system_check_directory'</span>);</span><br /></span></code></p>
+    <p><code><span class="def-txt"><span class="g-txt">...<br />
+    <br />
+    function</span> <span class="b-txt">system_check_directory</span><span class="g-txt">(</span><span class="b-txt">$form_element</span><span class="g-txt">,</span> <span class="b-txt">&amp;$form_state</span><span class="g-txt">) {<br /></span> <span class="b-txt">&nbsp;&nbsp;file_check_directory</span><span class="g-txt">(</span><span class="b-txt">$form_element</span><span class="g-txt">[</span><span class="r-txt">'#value'</span><span class="g-txt">],</span> <span class="b-txt">FILE_CREATE_DIRECTORY</span><span class="g-txt">,</span> <span class="b-txt">$form_element</span><span class="g-txt">[</span><span class="r-txt">'#parents'</span><span class="g-txt">][</span><span class="b-txt">0</span><span class="g-txt">]);<br /></span> <span class="b-txt">&nbsp;&nbsp;</span><span class="g-txt">return</span> <span class="b-txt">$form_element</span><span class="g-txt">;<br />
+    }</span><span class="g-txt"><br /></span> <span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="ahah" id="ahah"></a>#ahah</h3>
+  <p><strong>Used by</strong>:
+    <a href="#button">button</a>,
+    <a href="#checkbox">checkbox</a>,
+    <a href="#hidden">hidden</a>,
+    <a href="#image_button">image button</a>,
+    <a href="#password">password</a>,
+    <a href="#radio">radio</a>,
+    <a href="#select">select</a>,
+    <a href="#submit">submit</a>,
+    <a href="#textarea">textarea</a>,
+    <a href="#textfield">textfield</a>
+  </p>
+  <p>An array of elements whose values control the behavior of the element with respect to the Drupal AHAH javascript methods.</p>
+  <p>The #ahah name refers to <a href="http://en.wikipedia.org/wiki/AHAH">AHAH javascript replacement</a> (Asychronous HTML and HTTP), a relative of AJAX.
+    AHAH is a form of javascript page replacement that is both easy and straight forward. In a nutshell an AHAH request follows these steps:</p>
+  <ol>
+    <li>Drupal builds a form element with a set of #ahah properties. The <code>misc/ahah.js</code> file is included on the page automatically. </li>
+    <li>ahah.js finds all the form elements on the page that have an <a href="#ahah_path">#ahah['path']</a> set and adds an event handler for the <a href="#ahah_event">#ahah['event']</a> set on that form element.</li>
+    <li>When the <a href="#ahah_event">#ahah['event']</a> occurs on the element (such as 'click'), the AHAH request is made to the Drupal path of the element's <a href="#ahah_path">#ahah['path']</a>.<br />
+    </li>
+    <li>Drupal generates HTML in a second request in the background. While the user waits for the callback to execute a throbber or progress bar is shown as determined by <a href="#ahah_progress">#ahah['progress']</a>. The result is returned to the original page containing the form element.</li>
+    <li>ahah.js gets the result and inserts the returned HTML into the <a href="#ahah_wrapper">#ahah['wrapper']</a>.
+    Depending on the <a href="#ahah_method">#ahah['method']</a>, the result may affect the wrapper in different ways. </li>
+  </ol>
+  <h3><a name="ahah_effect" id="ahah_effect"></a>#ahah['effect']</h3>
+
+  <p><strong>Description</strong>: Specifies the effect used when adding the content from an AHAH request. </p>
+  <p><strong>Values</strong>: String. Possible values: 'none' (default), 'fade', 'slide'. If the <a href="http://interface.eyecon.ro/">interface elements library</a> is installed, any effect with the name <em>effect</em>Toggle may also be used. </p>
+   <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/poll/poll.module/">poll.module</a>):</p>
+
+    <div class="codeblock"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp; $form</span><span style="color: #007700">[</span><span style="color: #DD0000">'choice_wrapper'</span><span style="color: #007700">][</span><span style="color: #DD0000">'poll_more'</span><span style="color: #007700">] = array(<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'submit'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'More choices'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#description' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">"If the amount of boxes above isn't enough, click here to add more choices."</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#weight' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#submit' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'poll_more_choices_submit'</span><span style="color: #007700">), </span><span style="color: #FF8000">// If no javascript action.<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#ahah' </span><span style="color: #007700">=&gt; array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'path' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'poll/js'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'wrapper' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'poll-choices'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'method' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'replace'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'effect' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'fade'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp; ),<br /></span></span></code></div>
+
+   <h3><a name="ahah_event" id="ahah_event"></a>#ahah['event']</h3>
+
+  <p><strong>Description</strong>: When this event occurs to this element, Drupal will perform an HTTP request in the background via Javascript.</p>
+
+  <p><strong>Values</strong>: String. Possible values: Any valid <a href="http://docs.jquery.com/Events">jQuery event</a>, including 'mousedown', 'blur', and 'change'.
+  Note that #ahah['event'] does not need to be explicitly specified. Although it can be manually set, usually the <a href="#element_default_values">default value </a> will be sufficient.</p>
+
+  <h3><a name="ahah_method" id="ahah_method"></a>#ahah['method']</h3>
+  <p><strong>Description</strong>: Modify the behavior of the returned HTML from an AHAH request when inserting into the <a href="#ahah_wrapper">#ahah_wrapper</a>. If not set, the returned HTML will replace the contents of the wrapper element, but it's also possible to use any of the available <a href="http://docs.jquery.com/DOM/Manipulation">jQuery operations for DOM manipulation</a>. </p>
+  <p><strong>Values</strong>: String. Possible values: 'replace' (default), 'after', 'append', 'before', 'prepend'.</p>
+
+  <h3><a name="ahah_path" id="ahah_path"></a>#ahah['path']</h3>
+
+
+  <p><strong>Description</strong>: If set, this property triggers AHAH behaviors on a form element. This is the Drupal menu path to a callback function which will generate HTML and return the string of HTML to Drupal. The result will be placed in the div specified in <a href="#ahah_wrapper">#ahah['wrapper']</a>. </p>
+  <p><strong>Values</strong>: String containing a Drupal menu path.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/upload/upload.module">upload.module</a>):</p>
+
+  <div class="codeblock"><code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/**<br />* Implementation of hook_menu().<br />*/<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">upload_menu</span><span style="color: #007700">() {<br />&nbsp; </span><span style="color: #0000BB">$items</span><span style="color: #007700">[</span><span style="color: #DD0000">'upload/js'</span><span style="color: #007700">] = array(<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'page callback' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'upload_js'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'access arguments' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'upload files'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'type' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">MENU_CALLBACK</span><span style="color: #007700">,<br />&nbsp; );<br />&nbsp; ...<br />&nbsp; return </span><span style="color: #0000BB">$items</span><span style="color: #007700">;<br />}<br /><br />...<br /><br />function </span><span style="color: #0000BB">_upload_form</span><span style="color: #007700">(</span><span style="color: #0000BB">$node</span><span style="color: #007700">) {<br />&nbsp; ...<br />&nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'new'</span><span style="color: #007700">][</span><span style="color: #DD0000">'attach'</span><span style="color: #007700">] = array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'submit'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Attach'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#name' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'attach'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#ahah' </span><span style="color: #007700">=&gt; array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'path' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'upload/js'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'wrapper' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'attach-wrapper'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'progress' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'bar'</span><span style="color: #007700">, </span><span style="color: #DD0000">'message' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Please wait...'</span><span style="color: #007700">)),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#submit' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'node_form_submit_build_node'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp; );<br />&nbsp; ...<br />return </span><span style="color: #0000BB">$form</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span></span></code></div>
+
+  <p>#ahah['path'] is set to 'upload/js', which has a menu item defined in the same module. Then the menu hook will call the 'upload_js' function which generates HTML and returns it to original page.</p>
+
+  <h3><a name="ahah_progress" id="ahah_progress"></a>#ahah['progress']</h3>
+
+  <p><strong>Description</strong>: Choose either a throbber or progress bar that is displayed while awaiting a response from the callback, and add an optional message.</p>
+
+  <p><strong>Values</strong>: Array.</p>
+  <p>Possible keys: 'type', 'message', 'url', 'interval'</p>
+  <p>Possible values:</p>
+  <ul>
+    <li><strong>#ahah['progress']['type']</strong> String. Possible values: 'throbber' (default), 'bar'.
+    </li>
+    <li><strong>#ahah['progress']['message']</strong> String.  An optional message to the user; should be wrapped with t().
+    </li>
+    <li><strong>#ahah['progress']['url']</strong> String. The optional callback path to use to determine how full the progress bar is (as defined in progress.js). Only useable when 'type' is 'bar'.
+    </li>
+    <li><strong>#ahah['progress']['interval']</strong> String. The interval to be used in updating the progress bar (as defined in progress.js).  Ony used if 'url' is defined and 'type' is 'bar'.
+    </li>
+  </ul>
+
+  <p><strong>Usage example</strong>: see <a href="#ahah_path">above usage</a> in upload.module</p>
+
+  <h3><a name="ahah_wrapper" id="ahah_wrapper"></a>#ahah['wrapper']</h3>
+  <p><strong>Description</strong>: This property defines the HTML id attribute of an element on the page will server as the destination for HTML returned by an AHAH request. Usually, a div element is used as the wrapper, as it provides the most flexibility for placement of elements before, after, or inside of it's HTML tags. This property  is required for using AHAH requests in on a form element.</p>
+  <p><strong>Values</strong>: String containg a valid id attribute of an HTML element on the same page.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/upload/upload.module">upload.module</a>):</p>
+
+  <div class="codeblock"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp; $form</span><span style="color: #007700">[</span><span style="color: #DD0000">'new'</span><span style="color: #007700">][</span><span style="color: #DD0000">'attach'</span><span style="color: #007700">] = array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'submit'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Attach'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#name' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'attach'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#ahah' </span><span style="color: #007700">=&gt; array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'path' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'upload/js'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'wrapper' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'attach-wrapper'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'progress' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'bar'</span><span style="color: #007700">, </span><span style="color: #DD0000">'message' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Please wait...'</span><span style="color: #007700">)),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#submit' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'node_form_submit_build_node'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp; );<br /></span></span></code></div>
+
+
+  <h3><a name="attributes" id="attributes"></a>#attributes</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#fieldset">fieldset</a>, <a href="#file">file</a>, <a href="#form">form</a>, <a href="#image_button">image_button</a>, <a href="#password">password</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#submit">submit</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: Additional HTML attributes, such as 'class' can be set using this mechanism.</p>
+  <p><strong>Values</strong>: Any HTML attribute not covered by other properties, e.g. <strong>class</strong> (for control types), <strong>enctype</strong> (for forms).</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/search/search.module">search.module</a>):</p>
+<p><strong>Note:</strong> If you are altering an existing form via hook_form_alter() or a similar means, be careful with this property! You will probably want to add to the existing array rather than writing over it, so don't follow this usage example exactly.</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'#attributes'</span><span class="g-txt">] = array(</span><span class="r-txt">'class'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'search-form'</span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="autocomplete_path" id="autocomplete_path"></a>#autocomplete_path</h3>
+  <p><strong>Used by</strong>: <a href="#textfield">textfield</a></p>
+  <p><strong>Description</strong>: The path the AJAX autocomplete script uses as the source for autocompletion.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/node/node.module">node.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'author'</span><span class="g-txt">][</span><span class="r-txt">'name'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textfield'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Authored by'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#autocomplete_path'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'user/autocomplete'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">name</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt; -</span><span class="b-txt">1,<br /></span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="built" id="built"></a>#built</h3>
+  <p><strong>Used by</strong>: <a href="#form">form</a></p>
+  <p><strong>Description</strong>: Used to ascertain whether or not a form element has been built yet.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong>: INTERNAL. See the <a href="http://api.drupal.org/api/function/_form_builder">_form_builder</a> function in <a href="http://api.drupal.org/api/file/includes/form.inc">form.inc</a>.</p>
+
+  <h3><a name="button_type" id="button_type"></a>#button_type</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#image_button">image_button</a>, <a href="#submit">submit</a></p>
+  <p><strong>Description</strong>: Adds a CSS class to the button, in the form <em>form-[button_type_value]</em>. Note that this does NOT set the HTML attribute <em>type</em> of the button.</p>
+  <p class="help"><strong>Values</strong>: String </p>
+  <p><strong>Usage example</strong>: (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $type</span><span class="g-txt">[</span><span class="r-txt">'submit'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#input'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#name'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'op'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#button_type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'submit'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#submit'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE,<br /></span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="collapsed" id="collapsed"></a>#collapsed</h3>
+  <p><strong>Used by</strong>: <a href="#fieldset">fieldset</a></p>
+  <p><strong>Description</strong>: Indicates whether or not the fieldset is collapsed by default. See <a href="#collapsible">#collapsible</a> property.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/block/block.module">block.module</a>) :</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'block'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'fieldset'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Block configuration'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">3</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#collapsible'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#collapsed'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">FALSE</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#tree'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="collapsible" id="collapsible"></a>#collapsible</h3>
+  <p><strong>Used by</strong>: <a href="#fieldset">fieldset</a></p>
+  <p><strong>Description</strong>: Indicates whether or not the fieldset can be collapsed with JavaScript. See <a href="#collapsed">#collapsed</a> property.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/block/block.module">block.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'block'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'fieldset'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Block configuration'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">3</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#collapsible'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#collapsed'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">FALSE</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#tree'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="cols" id="cols"></a>#cols</h3>
+  <p><strong>Used by</strong>: <a href="#textarea">textarea</a></p>
+  <p><strong>Description</strong>: How many columns wide the textarea should be (see also <a href="#rows">#rows</a>)</p>
+  <p><strong>Values</strong>: A positive number</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/aggregator/aggregator.module">aggregator.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'description'</span><span class="g-txt">] = array(<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textarea'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Description'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'description'</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#cols'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#rows'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">5</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="default_value" id="default_value"></a>#default_value</h3>
+  <p><strong>Used by</strong>: <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#hidden">hidden</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#token">token</a>, <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: The value of the form element that will be displayed or selected initially if the form has not been submitted yet. <strong>Should NOT be confused with</strong> <strong><a href="#value">#value</a></strong>, which is a hard-coded value the user cannot change!</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/forum/forum.module">forum.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'body'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textarea'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Body'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">body</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#required'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="delta" id="delta"></a>#delta</h3>
+  <p><strong>Used by</strong>: <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: Number of weights to have selectable. For example, with $delta =&gt; 10, the weight selection box would display numbers from -10 to 10.</p>
+  <p><strong>Values</strong>: A positive number</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/menu/menu.module">menu.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'weight'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'weight'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Weight'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'weight'</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#delta'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">10</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Optional. In the menu, the heavier items will sink and the lighter items will be positioned nearer the top.'</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="description" id="description"></a>#description</h3>
+  <p><strong>Used by</strong>: <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#fieldset">fieldset</a>, <a href="#file">file</a>, <a href="#item">item</a>, <a href="#password">password</a>, <a href="#password_confirm">password_confirm</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: The description of the form element. Make sure to enclose inside the <a href="http://api.drupal.org/api/function/t">t</a>() function so this property can be translated.</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/menu/menu.module">menu.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'weight'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'weight'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Weight'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'weight'</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#delta'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">10</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Optional. In the menu, the heavier items will sink and the lighter items will be positioned nearer the top.'</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="disabled" id="disabled"></a>#disabled</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#file">file</a>, <a href="#image_button">image_button</a>, <a href="#password">password</a>, <a href="#password_confirm">password_confirm</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#submit">submit</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: Disables (greys out) a form input element. Note that disabling a form field doesn't necessarily prevent someone from submitting a value through DOM manipulation. It just tells the browser not to accept input.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    &nbsp; &nbsp; &nbsp;</span> <span class="g-txt">if&nbsp;(isset(</span><span class="b-txt">$disabled</span><span class="g-txt">[</span><span class="b-txt">$name</span><span class="g-txt">]))&nbsp;{<br />
+    &nbsp; &nbsp; &nbsp; &nbsp;</span> <span class="b-txt">$form</span><span class="g-txt">[</span><span class="r-txt">'theme_settings'</span><span class="g-txt">][</span><span class="b-txt">$name</span><span class="g-txt">][</span><span class="r-txt">'#disabled'</span><span class="g-txt">]&nbsp;=&nbsp;</span><span class="b-txt">TRUE</span><span class="g-txt">;<br />
+    &nbsp; &nbsp; &nbsp; }<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="element_validate" id="element_validate"></a>#element_validate</h3>
+  <p class="help"><strong>Used by</strong>: any element</p>
+  <p><strong>Description</strong>: A list of custom validation functions that need to be passed. The functions must use form_error() or form_set_error() to set an error if the validation fails.</p>
+  <p><strong>Values</strong>: an array of function names to be called to validate this element (and/or its children).</p>
+  <p>A validation function for an element takes the element and the form state as parameters, and has the form:</p>
+  <div class="codeblock">
+    <code>
+      <span style="color: #007700">function </span><span style="color: #0000BB">myelement_validate</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">, &amp;</span><span style="color: #0000BB">$form_state</span><span style="color: #007700">) {<br />
+      &nbsp;&nbsp; if (empty(</span><span style="color: #0000BB">$element</span><span style="color: #007700">[</span><span style="color: #DD0000">'#value'</span><span style="color: #007700">])) {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">form_error</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">, </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'This field is required.'</span><span style="color: #007700">));<br />
+      &nbsp;&nbsp; }<br />
+      }<br /></span>
+    </code>
+  </div>
+
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/filter/filter.module/">filter.module</a>):</p>
+<p><strong>Note:</strong> If you are altering an existing form via hook_form_alter() or a similar means, be careful with this property! You will probably want to add to the existing array rather than writing over it, so don't follow this usage example exactly.</p>
+  <div class="codeblock">
+    <code>
+      <span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />
+      &nbsp; </span><span style="color: #007700">if (</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$formats</span><span style="color: #007700">) &gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">) {<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form </span><span style="color: #007700">= array(<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'fieldset'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#title' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Input format'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#collapsible' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">TRUE</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#collapsed' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">TRUE</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#weight' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$weight</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#element_validate' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'filter_form_validate'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp; );<br />
+      &nbsp;&nbsp; ...<br />
+      </span><span style="color: #0000BB">?&gt;</span></span>
+    </code>
+
+  </div>
+
+  <h3 class="help"><a name="error" id="error"></a>#error</h3>
+  <p>INTERNAL. Indicates whether or not a form element has been flagged as having an error.</p>
+
+  <h3><a name="executes_submit_callback" id="executes_submit_callback"></a>#executes_submit_callback</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#image_button">image_button</a>, <a href="#submit">submit</a></p>
+  <p><strong>Description</strong>: Indicates whether or not button should submit the form.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+
+  <h3 class="help"><a name="id" id="id"></a>#id</h3>
+  <p>INTERNAL. Used to populate form elements' id property. In rare cases, you can set this value yourself on a form element, to override the default setting.</p>
+
+  <h3 class="help"><a name="input" id="input"></a>#input</h3>
+  <p>INTERNAL. Indicates whether or not input is possible for this form element.</p>
+
+  <h3><a name="field_prefix" id="field_prefix"></a>#field_prefix</h3>
+  <p><strong>Used by</strong>: <a href="#textfield">textfield</a></p>
+  <p><strong>Description</strong>: Text or code that is placed directly in front of the textfield. This can be used to prefix a textfield with a constant string.</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>):</p>
+  <div class="codeblock">
+    <code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />
+    $form</span><span style="color: #007700">[</span><span style="color: #DD0000">'site_403'</span><span style="color: #007700">]&nbsp;=&nbsp;array(<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'textfield'</span><span style="color: #007700">,<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#title'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Default&nbsp;403&nbsp;(access&nbsp;denied)&nbsp;page'</span><span style="color: #007700">),<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#default_value'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">variable_get</span><span style="color: #007700">(</span><span style="color: #DD0000">'site_403'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">),<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#size'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">40</span><span style="color: #007700">,<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#description'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'This&nbsp;page&nbsp;is&nbsp;displayed&nbsp;when&nbsp;the&nbsp;requested&nbsp;document&nbsp;is&nbsp;denied&nbsp;to&nbsp;the&nbsp;current&nbsp;user.&nbsp;If&nbsp;unsure,&nbsp;specify&nbsp;nothing.'</span><span style="color: #007700">),<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#field_prefix'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">url</span><span style="color: #007700">(</span><span style="color: #0000BB">NULL</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">NULL</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">NULL</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">TRUE</span><span style="color: #007700">)&nbsp;.&nbsp;(</span><span style="color: #0000BB">variable_get</span><span style="color: #007700">(</span><span style="color: #DD0000">'clean_url'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;?&nbsp;</span><span style="color: #DD0000">''&nbsp;</span><span style="color: #007700">:&nbsp;</span><span style="color: #DD0000">'?q='</span><span style="color: #007700">)<br />
+    );<br /></span><span style="color: #0000BB">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="field_suffix" id="field_suffix"></a>#field_suffix</h3>
+  <p><strong>Used by</strong>: <a href="#textfield">textfield</a></p>
+  <p><strong>Description</strong>: Text or code that is placed directly after a textfield. This can be used to add a unit to a textfield.</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/upload/upload.module">system.module</a>):</p>
+  <div class="codeblock">
+    <code><span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />
+    $form</span><span style="color: #007700">[</span><span style="color: #DD0000">'settings_general'</span><span style="color: #007700">][</span><span style="color: #DD0000">'upload_usersize_default'</span><span style="color: #007700">]&nbsp;=&nbsp;array(<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'textfield'</span><span style="color: #007700">,<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#title'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Default&nbsp;total&nbsp;file&nbsp;size&nbsp;per&nbsp;user'</span><span style="color: #007700">),<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#default_value'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$upload_usersize_default</span><span style="color: #007700">,<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#size'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#maxlength'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#description'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'The&nbsp;default&nbsp;maximum&nbsp;size&nbsp;of&nbsp;all&nbsp;files&nbsp;a&nbsp;user&nbsp;can&nbsp;have&nbsp;on&nbsp;the&nbsp;site.'</span><span style="color: #007700">),<br />
+    &nbsp;&nbsp;</span><span style="color: #DD0000">'#field_suffix'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'MB'</span><span style="color: #007700">)<br />
+    );</span></span></code>
+  </div>
+
+  <h3><a name="maxlength" id="maxlength"></a>#maxlength</h3>
+  <p><strong>Used by</strong>: <a href="#password">password</a>, <a href="#textfield">textfield</a></p>
+  <p><strong>Description</strong>: The maximum amount of characters to accept as input.</p>
+  <p><strong>Values</strong>: A positive number.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/forum/forum.module">forum.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'title'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textfield'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Subject'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">title</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">128</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#required'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="method" id="method"></a>#method</h3>
+  <p><strong>Used by</strong>: <a href="#form">form</a></p>
+  <p><strong>Description</strong>: The HTTP method with which the form will be submitted.</p>
+  <p><strong>Values</strong>: GET or POST. Default is POST.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/node/node.module">node.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'#method'</span><span class="g-txt">] =</span> <span class="r-txt">'post'</span><span class="g-txt">;<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="multiple" id="multiple"></a>#multiple</h3>
+  <p><strong>Used by</strong>: <a href="#select">select</a></p>
+  <p><strong>Description</strong>: Indicates whether the user may select more than one item.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/taxonomy/taxonomy.module">taxonomy.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br /></span> <span class="g-txt">return array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'select'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$title</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$value</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$options</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$description</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#multiple'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$multiple</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$multiple</span> <span class="g-txt">? </span><span class="b-txt">min</span><span class="g-txt">(</span><span class="b-txt">12</span><span class="g-txt">,</span> <span class="b-txt">count</span><span class="g-txt">(</span><span class="b-txt">$options</span><span class="g-txt">))<span class="r-txt"> </span></span><span class="g-txt">:</span> <span class="b-txt">0</span><span class="g-txt">,<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#weight'</span> <span class="g-txt">=&gt; -</span><span class="b-txt">15</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3 class="help"><a name="name" id="name"></a>#name</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#submit">submit</a></p>
+  <p><strong>Description</strong>: INTERNAL, except for buttons. All button and submit elements on a form should have the same name, which is set to 'op' by default in Drupal. This does not apply to image buttons. For non-button elements, Drupal sets the name by using 'foo' in $form['foo'] as well as any parents of the element.</p>
+  <p><strong>Values</strong>: String.</p>
+  <h3><a name="options" id="options"></a>#options</h3>
+  <p><strong>Used by</strong>: <a href="#checkboxes">checkboxes</a>, <a href="#radios">radios</a>, <a href="#select">select</a></p>
+  <p><strong>Description</strong>: Selectable options for a form element that allows multiple choices.</p>
+  <p><strong>Values</strong>: An array in the form of <code>array(t('Display value 1'), t('Display value 2'))</code> or <code>array('return_value1' =&gt; t('Display Value 1'), 'return_value2' =&gt; t('Display Value 2'))</code> if specific return values are required.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/comment/comment.module">comment.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'posting_settings'</span><span class="g-txt">][</span><span class="r-txt">'comment_preview'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'radios'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Preview comment'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">variable_get</span><span class="g-txt">(</span><span class="r-txt">'comment_preview'</span><span class="g-txt">,</span> <span class="b-txt">1</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt; array(</span><span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Optional'</span><span class="g-txt">),</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Required'</span><span class="g-txt">)),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="parents" id="parents"></a>#parents</h3>
+  <p class="help"><strong>Used by</strong>: All</p>
+  <p><strong>Description</strong>: Identifies parent form elements. See <a href="http://drupal.org/node/48643">#tree and #parents</a> in the handbook.</p>
+  <p class="help"><strong>Values</strong>: An array of element names.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/comment/comment.module">comment.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'admin'</span><span class="g-txt">][</span><span class="r-txt">'status'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'radios'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#parents'</span> <span class="g-txt">=&gt; array(</span><span class="r-txt">'status'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Status'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$status</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt; array(</span><span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Published'</span><span class="g-txt">),</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Not published'</span><span class="g-txt">)),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt; -</span><span class="b-txt">1</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="post_render" id="post_render"></a>#post_render</h3>
+  <p><strong>Used by</strong>: All elements and forms</p>
+  <p><strong>Description</strong>:
+Function(s) to call <strong>after</strong>
+rendering in </a><a href="http://api.drupal.org/api/function/drupal_render/" class="local">drupal_render</a>()
+has occured. The named function is called with two arguments, the rendered element and its children. It returns the (potentially)
+altered) element content.</p>
+
+<p><strong>Values</strong>: An array of function names to call.</p>
+
+<p><strong>Usage example</strong>:</p>
+
+<p><strong>Note:</strong> If you are altering an existing form via
+hook_form_alter() or a similar means, be careful with this property!
+You will probably want to add to the existing array rather than writing
+over it, so don't follow this usage example exactly.</p>
+
+<div class="codeblock"><code><span class="def-txt"> <span class="b-txt">&lt;?php<br />
+$form</span><span class="g-txt">[</span><span class="r-txt">'admin'</span><span class="g-txt">][</span><span class="r-txt">'#post_render'</span><span class="g-txt">] = array(</span><span class="r-txt">'admin_form_html_cleanup'</span><span class="g-txt">);<br />
+</span><span class="b-txt">?&gt;</span></span></code>
+<p>This example would call admin_form_html_cleanup($content, $element)
+after $element has been rendered to $content via <a href="http://api.drupal.org/api/function/drupal_render/" class="local">drupal_render</a>().
+$content may then be modified and must be returned.</p>
+</div>
+
+  <h3><a name="prefix" id="prefix"></a>#prefix</h3>
+  <p><strong>Used by</strong>: All elements and forms.</p>
+  <p><strong>Description</strong>: Text or markup to include before the form element. Also see <a href="#suffix">#suffix</a>.</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/poll/poll.module">poll.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'choice'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'fieldset'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Choices'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#prefix'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'&lt;div class="poll-form"&gt;'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#suffix'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'&lt;/div&gt;'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#tree'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="pre_render" id="pre_render"></a>#pre_render</h3>
+  <p><strong>Used by</strong>: All elements and forms.</p>
+  <p><strong>Description</strong>:
+Function(s) to call <strong>before</strong>
+rendering in </a><a href="http://api.drupal.org/api/function/drupal_render/" class="local">drupal_render</a>()
+has occured. The function(s) provided in #pre_render receive the element as an argument and 
+must return the altered element.</p>
+
+<p><strong>Values</strong>: An array of function names to call.</p>
+
+<p><strong>Usage example (filter.module)</strong>:</p>
+
+<p><strong>Note:</strong> If you are altering an existing form via
+hook_form_alter() or a similar means, be careful with this property!
+As demonstrated here, you will probably want to add to the existing array rather than writing
+over it.</p>
+
+<div class="codeblock"><code>
+// Prepend #pre_render callback to replace field value with user notice<br />
+// prior to rendering.<br />
+if (!isset($element['value']['#pre_render'])) {<br />
+&nbsp;&nbsp;$element['value']['#pre_render'] = array();<br />
+}<br />
+array_unshift($element['value']['#pre_render'], 'filter_form_access_denied');<br />
+<br />
+...<br />
+function filter_form_access_denied($element) {<br />
+&nbsp;&nbsp;$element['#value'] = t('This field has been disabled because you do not have sufficient permissions to edit it.');<br />
+&nbsp;&nbsp;return $element;<br />
+}<br />
+</code>
+<p>This example would call filter_form_access_denied($element) before
+the $element has been rendered via <a href="http://api.drupal.org/api/function/drupal_render/" class="local">drupal_render</a>().
+$element may then be modified and is returned for rendering.</p>
+</div>
+
+  <h3 class="help"><a name="printed" id="printed"></a>#printed</h3>
+  <p>INTERNAL. Used to determine whether or not a form element has been printed yet.</p>
+
+  <h3><a name="process"></a>#process</h3>
+  <p><strong>Description</strong>: An array of functions that are called when an element is processed. Using this callback, modules can "register" further actions. For example the "radios" form type is expanded to multiple radio buttons using a processing function.</p>
+  <p><strong>Values</strong>: Array of function names (strings)</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>) in <code>system_elements()</code>:</p>
+<p><strong>Note:</strong> If you are altering an existing form via hook_form_alter() or a similar means, be careful with this property! You will probably want to add to the existing array rather than writing over it, so don't follow this usage example exactly.</p>
+  <div class="codeblock">
+    <code><span style="color: #0000BB">$type</span><span style="color: #007700">[</span><span style="color: #DD0000">'radios'</span><span style="color: #007700">]&nbsp;=&nbsp;array(</span><span style="color: #DD0000">'#input'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">TRUE</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'#process'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(</span><span style="color: #DD0000">'expand_radios'</span><span style="color: #007700">));</span></code>
+    <p>In this example, the function <code>expand_radios</code> is called; the entire radios element is passed in as the argument. This function adds new elements of type <code>radio</code> to the existing <code>radios</code> element array, with keys and values corresponding to the processed element's <code>#options</code>.</p>
+  </div>
+
+  <h3 class="help"><a name="processed" id="processed"></a>#processed</h3>
+  <p>INTERNAL. Used to ascertain whether or not a form element has been processed (ie: expanded to multiple elements).</p>
+  <h3><a name="redirect" id="redirect"></a>#redirect</h3>
+  <p><strong>Used by</strong>: <a href="#form">form</a></p>
+  <p><strong>Description</strong>: The default goto value after form is submitted. This value should be returned by a form's submit callback function, but altering another form's <a href="#redirect">#redirect</a> value by using <a href="http://api.drupal.org/api/function/hook_form_alter" class="local">hook_form_alter</a>() can be useful to change where that form redirects after it is submitted. Also see <a href="#action">#action</a>.</p>
+  <p><strong>Values</strong>: An internal path or an array of arguments to pass to <a href="http://api.drupal.org/api/function/drupal_goto()" class="local">drupal_goto()</a> (check that function's documentation for information on the arguments).  The value may also be set to <code>FALSE</code> to prevent redirection after form submission.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/includes/locale.inc">locale.inc</a>):</p>
+
+  <div class="codeblock">
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />$form</span><span class="g-txt">[</span><span class="r-txt">'#redirect'</span><span class="g-txt">] = </span><span class="r-txt">'node'</span><span class="g-txt">;<br /></span><span class="b-txt">?&gt;</span></span></code></p>
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />$form</span><span class="g-txt">[</span><span class="r-txt">'#redirect'</span><span class="g-txt">] = array(</span><span class="r-txt">'user/login'</span><span class="g-txt">, </span><span class="r-txt">'destination=node&foo=bar'</span><span class="g-txt">);<br /></span><span class="b-txt">?&gt;</span></span></code></p>
+    <p><code><span class="def-txt"><span class="b-txt">&lt;?php<br />$form</span><span class="g-txt">[</span><span class="r-txt">'#redirect'</span><span class="g-txt">] = </span><span class="b-txt">FALSE</span><span class="g-txt">;<br /></span><span class="b-txt">?&gt;</span></span></code></p>
+  </div>
+
+  <h3><a name="required" id="required"></a>#required</h3>
+  <p><strong>Used by</strong>: <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#file">file</a>, <a href="#password">password</a>, <a href="#password_confirm">password_confirm</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: Indicates whether or not the element is required. This automatically validates for empty fields, and flags inputs as required. File fields are <strong>NOT</strong> allowed to be required.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/forum/forum.module">forum.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'title'</span><span class="g-txt">] = array(<br />
+    &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textfield'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Subject'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">title</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">128</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#required'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="resizable" id="resizable"></a>#resizable</h3>
+  <p><strong>Used by</strong>: <a href="#textarea">textarea</a></p>
+  <p><strong>Description</strong>: Whether users should be allowed to resize the text area</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+
+  <h3><a name="return_value" id="return_value"></a>#return_value</h3>
+  <p><strong>Used by</strong>: <a href="#checkbox">checkbox</a>, <a href="#image_button">image_button</a>, <a href="#radio">radio</a></p>
+  <p><strong>Description</strong>: Value element should return when selected</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/poll/poll.module">poll.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'morechoices'</span><span class="g-txt">] = array(<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'checkbox'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Need more choices'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#return_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">1</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">0</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">"If the amount of boxes above isn't enough, check this box and click the Preview button below to add some more."</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="rows" id="rows"></a>#rows</h3>
+  <p><strong>Used by</strong>: <a href="#textarea">textarea</a></p>
+  <p><strong>Description</strong>: How many rows high the textarea should be (see also <a href="#cols">#cols</a>)</p>
+  <p><strong>Values</strong>: A positive number</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/aggregator/aggregator.module">aggregator.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'description'</span><span class="g-txt">] = array(<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textarea'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Description'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'description'</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#cols'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#rows'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">5</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="size" id="size"></a>#size</h3>
+  <p><strong>Used by</strong>:  <a href="#password">password</a>, <a href="#password_confirm">password_confirm</a>, <a href="#select">select</a>, <a href="#textfield">textfield</a></p>
+  <p><strong>Description</strong>: Width of the textfield (in characters) or size of multiselect box (in lines).</p>
+  <p><strong>Values</strong>: A positive number.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/comment/comment.module">comment.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; $form</span><span class="g-txt">[</span><span class="r-txt">'admin'</span><span class="g-txt">][</span><span class="r-txt">'homepage'</span><span class="g-txt">] = array(<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> <span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textfield'</span><span class="g-txt">,<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> <span class="r-txt">'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Homepage'</span><span class="g-txt">),<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> <span class="r-txt">'#maxlength'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">255</span><span class="g-txt">,<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> <span class="r-txt">'#size'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">30</span><span class="g-txt">,<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span> <span class="r-txt">'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'homepage'</span><span class="g-txt">],<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="src" id="src"></a>#src</h3>
+  <p><strong>Used by</strong>: <a href="#image_button">image_button</a></p>
+  <p><strong>Description</strong>: The URL of the image of the button.</p>
+  <p><strong>Values</strong>: An URL.</p>
+
+  <h3><a name="submit-prop" id="submit-prop"></a>#submit</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#form">form</a>, <a href="#image_button">image_button</a>, <a href="#submit">submit</a></p>
+  <p><strong>Description</strong>: Contains a list of submit callbacks to be excuted on the form or only when a specific button is clicked.</p>
+  <p><strong>Values</strong>: An array of function names.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/menu/menu.module">menu.module</a>):</p>
+<p><strong>Note:</strong> If you are altering an existing form via hook_form_alter() or a similar means, be careful with this property! You will probably want to add to the existing array rather than writing over it, so don't follow this usage example exactly.</p>
+  <div class="codeblock">
+    <code>
+      <span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />
+      </span><span style="color: #007700">function </span><span style="color: #0000BB">menu_form_alter</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$form</span><span style="color: #007700">, </span><span style="color: #0000BB">$form_state</span><span style="color: #007700">, </span><span style="color: #0000BB">$form_id</span><span style="color: #007700">) {<br />
+      &nbsp;&nbsp; ...&nbsp; <br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'menu'</span><span style="color: #007700">][</span><span style="color: #DD0000">'parent'</span><span style="color: #007700">] = array(<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'select'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#title' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Parent item'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#default_value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$default</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#options' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$options</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#attributes' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'class' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'menu-title-select'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp; );<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'#submit'</span><span style="color: #007700">][] = </span><span style="color: #DD0000">'menu_node_form_submit'</span><span style="color: #007700">;<br />
+      }<br />
+      </span><span style="color: #0000BB">?&gt;</span></span>
+    </code>
+  </div>
+
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/menu/menu.admin.inc">menu.module</a>):</p>
+  <div class="codeblock">
+    <code>
+      <span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />
+      &nbsp;&nbsp;&nbsp; $form</span><span style="color: #007700">[</span><span style="color: #DD0000">'menu_name'</span><span style="color: #007700">] = array(</span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'value'</span><span style="color: #007700">, </span><span style="color: #DD0000">'#value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$menu</span><span style="color: #007700">[</span><span style="color: #DD0000">'menu_name'</span><span style="color: #007700">]);<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'#insert'</span><span style="color: #007700">] = </span><span style="color: #0000BB">FALSE</span><span style="color: #007700">;<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'delete'</span><span style="color: #007700">] = array(<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'submit'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Delete'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#access' </span><span style="color: #007700">=&gt; !</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$menu</span><span style="color: #007700">[</span><span style="color: #DD0000">'menu_name'</span><span style="color: #007700">], </span><span style="color: #0000BB">menu_list_system_menus</span><span style="color: #007700">()),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#submit' </span><span style="color: #007700">=&gt; array(</span><span style="color: #DD0000">'menu_custom_delete_submit'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#weight' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">10</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp; );<br />
+      </span><span style="color: #0000BB">?&gt;</span></span>
+    </code>
+  </div>
+
+
+  <h3><a name="suffix" id="suffix"></a>#suffix</h3>
+  <p><strong>Used by</strong>: All elements and forms</p>
+  <p><strong>Description</strong>: Text or markup to include after the form element. Also see <a href="#prefix">#prefix</a>.</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/poll/poll.module">poll.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'choice'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'fieldset'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Choices'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#prefix'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'&lt;div class="poll-form"&gt;'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#suffix'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'&lt;/div&gt;'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#tree'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="theme" id="theme"></a>#theme</h3>
+  <p><strong>Used by</strong>: All elements and forms.</p>
+  <p><strong>Description</strong>: Theme function to call for element.</p>
+  <p><strong>Values</strong>: The name of a theme function, without the initial theme_.</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/upload/upload.module">upload.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'#theme'</span><span class="g-txt">] =</span> <span class="r-txt">'upload_form_new'</span><span class="g-txt">;<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="title" id="title"></a>#title</h3>
+  <p><strong>Used by</strong>: <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#fieldset">fieldset</a>, <a href="#file">file</a>, <a href="#item">item</a>, <a href="#password">password</a>, <a href="#password_confirm">password_confirm</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#weight">weight</a></p>
+  <p><strong>Description</strong>: The title of the form element. Make sure to enclose inside the <a href="http://api.drupal.org/api/function/t">t</a>() function so this property can be translated.</p>
+  <p><strong>Values</strong>: Mixed</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/aggregator/aggregator.module">aggregator.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'description'</span><span class="g-txt">] = array(<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'textarea'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Description'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$edit</span><span class="g-txt">[</span><span class="r-txt">'description'</span><span class="g-txt">],</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#cols'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">60</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#rows'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">5</span><span class="g-txt">,<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="tree" id="tree"></a>#tree</h3>
+  <p><strong>Used by</strong>: All</p>
+  <p><strong>Description</strong>: Used to allow collections of form elements. Normally applied to the "parent" element, as the #tree property cascades to sub-elements. Use where you previously used ][ in form_ calls. For more information, see <a href="http://drupal.org/node/48643">#tree and #parents</a> in the handbook.</p>
+  <p><strong>Values</strong>: TRUE or FALSE</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/system/system.module">system.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'status'</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'checkboxes'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$status</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">$options</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#tree'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">TRUE</span><span class="g-txt">,<br />
+    );<br /></span> <span class="b-txt">$required</span> <span class="g-txt">= array(</span><span class="r-txt">'block'</span><span class="g-txt">,</span> <span class="r-txt">'filter'</span><span class="g-txt">,</span> <span class="r-txt">'system'</span><span class="g-txt">,</span> <span class="r-txt">'user'</span><span class="g-txt">,</span> <span class="r-txt">'watchdog'</span><span class="g-txt">);<br />
+    foreach (</span><span class="b-txt">$required</span> <span class="g-txt">as</span> <span class="b-txt">$require</span><span class="g-txt">) {<br /></span> <span class="b-txt">&nbsp;&nbsp;$form</span><span class="g-txt">[</span><span class="r-txt">'status'</span><span class="g-txt">][</span><span class="b-txt">$require</span><span class="g-txt">] = array(</span><span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp; '#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'hidden'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">1</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;'#suffix'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'required'</span><span class="g-txt">),<br />
+    &nbsp;&nbsp;);<br />
+    }<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="type" id="type"></a>#type</h3>
+  <p><strong>Used by</strong>: All</p>
+  <p><strong>Description</strong>: Used to determine the type of form element.</p>
+  <p><strong>Values</strong>: <a href="#button">button</a>, <a href="#checkbox">checkbox</a>, <a href="#checkboxes">checkboxes</a>, <a href="#date">date</a>, <a href="#fieldset">fieldset</a>, <a href="#file">file</a>, <a href="#form">form</a>, <a href="#hidden">hidden</a>, <a href="#image_button">image_button</a>, <a href="#item">item</a>, <a href="#markup">markup</a>, <a href="#password">password</a>, <a href="#password_confirm">password_confirm</a>, <a href="#radio">radio</a>, <a href="#radios">radios</a>, <a href="#select">select</a>, <a href="#submit">submit</a>, <a href="#textarea">textarea</a>, <a href="#textfield">textfield</a>, <a href="#token">token</a>, <a href="#val">value</a>, <a href="#weight">weight</a></p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/locale/locale.module">locale.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'submit'</span><span class="g-txt">] = array(</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'submit'</span><span class="g-txt">,</span> <span class="r-txt">'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Import'</span><span class="g-txt">));<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="validate" id="validate"></a>#validate</h3>
+  <p class="help"><strong>Used by</strong>: <a href="#button">button</a>, <a href="#image_button">image_button</a>, <a href="#form">form</a>, <a href="#submit">submit</a></p>
+  <p><strong>Description</strong>: A list of custom validation functions that need to be passed.This is usually used to add additional validation functions to a form, or to use an alternate function rather than the default form validation function which is the form ID with <em>_validate</em> appended to it.</p>
+  <p><strong>Values</strong>: An array of function names. Each such function will take $form and $form_state as parameters and should use form_set_error() if the form values do not pass validation. For example:</p>
+  <div class="codeblock">
+    <code>
+    <span class="g-txt">function </span><span class="b-txt">test_form_validate</span><span class="g-txt">(</span><span class="b-txt">$form</span><span class="g-txt">, </span><span class="b-txt">&amp;$form_state</span><span class="g-txt">) {<br />
+      &nbsp;&nbsp;if (</span><span class="b-txt">$form_state['values']</span><span class="g-txt">[</span><span class="r-txt">'name'</span><span class="g-txt">] == </span><span class="r-txt">''</span><span class="g-txt">) {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="b-txt">form_set_error</span><span class="g-txt">(</span><span class="r-txt">'name'</span><span class="g-txt">, </span><span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'You must select a name for this group of settings.'</span><span class="g-txt">));<br />
+      &nbsp;&nbsp;}<br />
+      }</span>
+    </code>
+  </div>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/node/node.module">node.module</a>):</p>
+<p><strong>Note:</strong> If you are altering an existing form via hook_form_alter() or a similar means, be careful with this property! You will probably want to add to the existing array rather than writing over it, so don't follow this usage example exactly.</p>
+  <div class="codeblock">
+    <code>
+      <span style="color: #000000"><span style="color: #0000BB">&lt;?php<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #FF8000">// Node types:<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$types </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #DD0000">'check_plain'</span><span style="color: #007700">, </span><span style="color: #0000BB">node_get_types</span><span style="color: #007700">(</span><span style="color: #DD0000">'names'</span><span style="color: #007700">));<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'advanced'</span><span style="color: #007700">][</span><span style="color: #DD0000">'type'</span><span style="color: #007700">] = array(<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'checkboxes'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#title' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Only of the type(s)'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#prefix' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'&lt;div class="criterion"&gt;'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#suffix' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'&lt;/div&gt;'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#options' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$types</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp; );<br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'advanced'</span><span style="color: #007700">][</span><span style="color: #DD0000">'submit'</span><span style="color: #007700">] = array(<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#type' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'submit'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#value' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">t</span><span style="color: #007700">(</span><span style="color: #DD0000">'Advanced search'</span><span style="color: #007700">),<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#prefix' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'&lt;div class="action"&gt;'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color: #DD0000">'#suffix' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'&lt;/div&gt;'</span><span style="color: #007700">,<br />
+      &nbsp;&nbsp;&nbsp; );<br />
+      <br />
+      &nbsp;&nbsp;&nbsp; </span><span style="color: #0000BB">$form</span><span style="color: #007700">[</span><span style="color: #DD0000">'#validate'</span><span style="color: #007700">][] = </span><span style="color: #DD0000">'node_search_validate'</span><span style="color: #007700">;<br />
+      </span><span style="color: #0000BB">?&gt;</span></span>
+    </code>
+  </div>
+
+
+  <h3 class="help"><a name="validation" id="validation"></a>#validation_arguments</h3>
+  <p>INTERNAL</p>
+
+  <h3><a name="value" id="value"></a>#value</h3>
+  <p><strong>Used by</strong>: <a href="#button">button</a>, <a href="#hidden">hidden</a>, <a href="#image_button">image_button</a>, <a href="#item">item</a>, <a href="#markup">markup</a>, <a href="#submit">submit</a>, <a href="#token">token</a>, <a href="#val">value</a></p>
+  <p><strong>Description</strong>: Used to set values that cannot be edited by the user. <strong>Should NOT be confused with <a href="#default_value">#default_value</a></strong>, which is for form inputs where users can override the default value.</p>
+  <p><strong>Values</strong>: Mixed (text or numbers)</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/locale/locale.module">locale.module</a>):</p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'submit'</span><span class="g-txt">] = array(</span><span class="r-txt">'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'submit'</span><span class="g-txt">,</span> <span class="r-txt">'#value'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Import'</span><span class="g-txt">));<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+
+  <h3><a name="weightval" id="weightval"></a>#weight</h3>
+  <p><strong>Used by</strong>: All elements</p>
+  <p><strong>Description</strong>: Used to sort the list of form elements before being output; lower numbers appear before higher numbers.</p>
+  <p><strong>Values</strong>: A positive or negative number (integer or decimal)</p>
+  <p><strong>Usage example</strong> (<a href="http://api.drupal.org/api/file/modules/book/book.module">book.module</a>):<code><span class="def-txt"><span class="b-txt"><br /></span></span></code></p>
+  <div class="codeblock">
+    <code><span class="def-txt"><span class="b-txt">&lt;?php<br />
+    $form</span><span class="g-txt">[</span><span class="r-txt">'parent'</span><span class="g-txt">] = array(<br /></span> <span class="r-txt">&nbsp;&nbsp;'#type'</span> <span class="g-txt">=&gt;</span> <span class="r-txt">'select'</span><span class="g-txt">,</span> <span class="r-txt"><br />
+    &nbsp; '#title'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'Parent'</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#default_value'</span> <span class="g-txt">=&gt; (</span><span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">parent</span> <span class="g-txt">?</span> <span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">parent</span> <span class="g-txt">:</span> <span class="b-txt">arg</span><span class="g-txt">(</span><span class="b-txt">4</span><span class="g-txt">)),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#options'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">book_toc</span><span class="g-txt">(</span><span class="b-txt">$node</span><span class="g-txt">-&gt;</span><span class="b-txt">nid</span><span class="g-txt">),</span> <span class="r-txt"><br />
+    &nbsp;&nbsp;'#weight'</span> <span class="g-txt">=&gt; -</span><span class="b-txt">15</span><span class="g-txt">,<br />
+    &nbsp;&nbsp;</span><span class="r-txt">'#description'</span> <span class="g-txt">=&gt;</span> <span class="b-txt">t</span><span class="g-txt">(</span><span class="r-txt">'The parent that this page belongs in. Note that pages whose parent is &amp;lt;top-level&amp;gt; are regarded as independent, top-level books.'</span><span class="g-txt">),<br />
+    );<br /></span><span class="b-txt">?&gt;</span></span></code>
+  </div>
+</body>
+</html>

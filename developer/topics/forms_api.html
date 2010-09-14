@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- $Id: forms_api.html,v 1.14.2.5 2009/10/23 15:18:57 jhodgdon Exp $ -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Forms API Quickstart Guide</title>
+</head>
+<body>
+<h1>Forms API Quickstart Guide</h1>
+<p>The Drupal forms API is a powerful leap forward. It also allows for almost unlimited possibilities for custom theming, validation, and execution of forms. Even better, ANY form (even those in core) can be altered in almost any way imaginable--elements can be removed, added, and rearranged. This page is certainly not a comprehensive guide to this functionality, but should provide a good working foundation with which to do the most basic form creation, theming, validation, and execution. For programming details on form elements and their properties, please see the <a href="http://api.drupal.org/api/file/developer/topics/forms_api_reference.html/6">Forms API Reference</a>.</p>
+<h2>Creating Forms</h2>
+<p>Form elements are now declared in array fashion, with the hierarchical structure of the form elements themselves as array elements (which can be nested), and each form elements properties/attributes listed as array elements in key/value pairs--the key being the name of the property/attribute, and the value being the value of the property/attribute. For example, here's how to go about constructing a textfield form element:</p>
+<div class="codeblock">
+  <p><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+    $form</font><font color="#007700">[</font><font color="#DD0000">'foo'</font><font color="#007700">] = array(<br />
+</font><font color="#DD0000">&nbsp;&nbsp;'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'textfield'</font><font color="#007700">, </font><font color="#DD0000"><br />
+ &nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'bar'</font><font color="#007700">),<br />
+&nbsp;&nbsp;</font><font color="#DD0000">'#default_value' </font><font color="#007700">=&gt; </font><font color="#0000BB">$object</font><font color="#007700">[</font><font color="#DD0000">'foo'</font><font color="#007700">],<br />
+&nbsp;&nbsp;</font></font></code><code><font color="#000000"><font color="#DD0000">'#size' </font><font color="#007700">=&gt; </font><font color="#0000BB">60</font><font color="#007700">,<br />
+&nbsp;&nbsp;</font></font></code><code><font color="#000000"><font color="#DD0000">'#maxlength' </font><font color="#007700">=&gt; </font><font color="#0000BB">64</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;'#description' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'baz'</font><font color="#007700">),<br />
+</font></font></code><code><font color="#000000"><font color="#007700">);<br />
+  </font><font color="#0000BB">?&gt;</font> </font> </code></p>
+</div>
+<p>and a submit button:</p>
+<div class="codeblock">
+  <p><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+    $form</font><font color="#007700">[</font><font color="#DD0000">'submit'</font><font color="#007700">] = array(</font><font color="#DD0000"><br />
+&nbsp; '#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'submit'</font><font color="#007700">,<br />
+&nbsp;&nbsp;</font></font></code><code><font color="#000000"><font color="#DD0000">'#value' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Save'</font><font color="#007700">),<br />
+</font></font></code><code><font color="#000000"><font color="#007700">);<br />
+  </font><font color="#0000BB">?&gt;</font> </font> </code></p>
+</div>
+<p>a few things to note:</p>
+<ol>
+  <li>The element's <code>name</code> property is declared in the <code>$form</code> array, at the very end of the array tree. For example, if an element in the form tree was structured like this:<br />
+    <br />
+    <div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+      $form</font><font color="#007700">[</font><font color="#DD0000">'account_settings'</font><font color="#007700">][</font><font color="#DD0000">'username'</font><font color="#007700">]<br />
+    </font><font color="#0000BB">?&gt;</font> </font> </code></div>
+    <br />
+    ...then that element's name property is 'username'--this is the key it will be available under in <code>$form_state['values']</code>, in your validation and submission functions, as the form code flattens the array in this fashion before it passes the key/value pairs. NOTE: if you wish to have the full tree structure passed to <code>$form_state['values']</code>, this is possible, and will be discussed later.</li>
+  <li>The type of form element is declared as an attribute with the <code>&#039;#type&#039;</code> property.</li>
+  <li>Properties/attributes keys are declared with surrounding quotes, beginning with a # sign. Values are strings.</li>
+  <li>The order of the properties/attributes doesn't matter, and any attributes that you don't need don't need to be declared. Many properties/attributes also have a default fallback value if not explicitly declared.</li>
+  <li>Don't use the <code>&#039;#value&#039;</code> attribute for any form elements that can be changed by the user. Use the <code>&#039;#default_value&#039;</code> attribute instead. Don't put values from  <code>$form_state['values']</code> (or <code>$_POST</code>) here! FormsAPI will deal with that for you; only put the <strong>original</strong> value of the field here.</li>
+</ol>
+<p>One great advantages of this system is that the explicitly named keys make deciphering the form element much easier.</p>
+<p>Let's take a look at a working piece of code using the API:</p>
+<div class="codeblock">
+			<p><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+              </font><font color="#007700">function </font><font color="#0000BB">test_form</font><font color="#007700">(</font><font color="#0000BB">$form_state</font><font color="#007700">) {<br />
+&nbsp;&nbsp;</font><font color="#FF8000">// Access log settings:<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$options </font><font color="#007700">= array(</font><font color="#DD0000">'1' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Enabled'</font><font color="#007700">), </font><font color="#DD0000">'0' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Disabled'</font><font color="#007700">));<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'access'</font><font color="#007700">] = array(</font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp; '#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'fieldset'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Access log settings'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#tree' </font><font color="#007700">=&gt; </font><font color="#0000BB">TRUE</font><font color="#007700">,<br />
+&nbsp;&nbsp;</font></font></code><code><font color="#000000"><font color="#007700">);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'access'</font><font color="#007700">][</font><font color="#DD0000">'log'</font><font color="#007700">] = array(</font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'radios'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Log'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#default_value' </font><font color="#007700">=&gt;&nbsp;&nbsp;</font><font color="#0000BB">variable_get</font><font color="#007700">(</font><font color="#DD0000">'log'</font><font color="#007700">, </font><font color="#0000BB">0</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#options' </font><font color="#007700">=&gt; </font><font color="#0000BB">$options</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#description' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'The log.'</font><font color="#007700">),<br />
+&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$period </font><font color="#007700">= </font><font color="#0000BB">drupal_map_assoc</font><font color="#007700">(array(</font><font color="#0000BB">3600</font><font color="#007700">, </font><font color="#0000BB">10800</font><font color="#007700">, </font><font color="#0000BB">21600</font><font color="#007700">, </font><font color="#0000BB">32400</font><font color="#007700">, </font><font color="#0000BB">43200</font><font color="#007700">, </font><font color="#0000BB">86400</font><font color="#007700">, </font><font color="#0000BB">172800</font><font color="#007700">, </font><font color="#0000BB">259200</font><font color="#007700">, </font><font color="#0000BB">604800</font><font color="#007700">, </font><font color="#0000BB">1209600</font><font color="#007700">, </font><font color="#0000BB">2419200</font><font color="#007700">, </font><font color="#0000BB">4838400</font><font color="#007700">, </font><font color="#0000BB">9676800</font><font color="#007700">), </font><font color="#DD0000">'format_interval'</font><font color="#007700">);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'access'</font><font color="#007700">][</font><font color="#DD0000">'timer'</font><font color="#007700">] = array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'select'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Discard logs older than'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#default_value' </font><font color="#007700">=&gt; </font><font color="#0000BB">variable_get</font><font color="#007700">(</font><font color="#DD0000">'timer'</font><font color="#007700">, </font><font color="#0000BB">259200</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#options' </font><font color="#007700">=&gt; </font><font color="#0000BB">$period</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#description' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'The timer.'</font><font color="#007700">),<br />
+&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;</font><font color="#FF8000">// Description<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'details'</font><font color="#007700">] = array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'fieldset'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Details'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#collapsible' </font><font color="#007700">=&gt; </font><font color="#0000BB">TRUE</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp; &nbsp;&nbsp;'#collapsed' </font><font color="#007700">=&gt; </font><font color="#0000BB">TRUE,<br />
+&nbsp;&nbsp;</font><font color="#007700">);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'details'</font><font color="#007700">][</font><font color="#DD0000">'description'</font><font color="#007700">] = array(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'textarea'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Describe it'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#default_value' </font><font color="#007700">=&gt;&nbsp;&nbsp;</font><font color="#0000BB">variable_get</font><font color="#007700">(</font><font color="#DD0000">'description'</font><font color="#007700">, </font><font color="#DD0000">''</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#cols' </font><font color="#007700">=&gt; </font><font color="#0000BB">60</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#rows' </font><font color="#007700">=&gt; </font><font color="#0000BB">5</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#description' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Log description.'</font><font color="#007700">),<br />
+&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'details'</font><font color="#007700">][</font><font color="#DD0000">'admin'</font><font color="#007700">] = array(</font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'checkbox'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Only admin can view'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#default_value' </font><font color="#007700">=&gt; </font><font color="#0000BB">variable_get</font><font color="#007700">(</font><font color="#DD0000">'admin'</font><font color="#007700">, </font><font color="#0000BB">0</font><font color="#007700">),<br />
+&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'name'</font><font color="#007700">] = array(</font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'textfield'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Name'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#size' </font><font color="#007700">=&gt; </font><font color="#0000BB">30</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#maxlength' </font><font color="#007700">=&gt; </font><font color="#0000BB">64</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;'#description' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Enter the name for this group of settings'</font><font color="#007700">),<br />
+&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'hidden'</font><font color="#007700">] = array(</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'value'</font><font color="#007700">, </font><font color="#DD0000">'#value' </font><font color="#007700">=&gt; </font><font color="#DD0000">'is_it_here'</font><font color="#007700">);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'submit'</font><font color="#007700">] = array(</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'submit'</font><font color="#007700">, </font><font color="#DD0000">'#value' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Save'</font><font color="#007700">));<br />
+&nbsp;&nbsp;return </font><font color="#0000BB">$form</font><font color="#007700">;<br />
+      }<br />
+<br />
+<font color="#007700">function </font><font color="#0000BB">test_page</font><font color="#007700">() {<br />
+&nbsp;&nbsp;return </font><font color="#0000BB">drupal_get_form</font><font color="#007700">(</font><font color="#DD0000">'test_form'</font><font color="#007700">)</font><font color="#007700">;<br />
+      }<br />
+
+</font><font color="#0000BB">?&gt;</font> </font></code></p>
+</div>
+<p>This example demonstrates how form elements can be built in a hierarchical fashion by expanding and layering the form array.  There are two functions involved - the function that builds the form, and another that renders the form using <code>drupal_get_form()</code>. Note that the form builder function always takes <code>$form_state</code> as its first argument, though for basic usage (as here) it is not used. Also note that the test_page() function that renders the form is returning the rendered HTML output, which is what you would need to do if test_page() is the page callback from a hook_menu() implementation, for example.</p>
+<p>Notice that the first layer is made up of two form groups, 'access', and 'details', and that inside each of these groups, one layer down, are some individual form elements. Order of construction is important here, as the form building code will default to the constructed order of the <code>$form</code> array when it builds the form (this can be overridden, and will be discussed later in the custom theming section). </p>
+<p>For form groups, the <code>&#039;#type&#039;</code> parameter is set to <code>&#039;fieldset&#039;</code>, and notice how the <code>&#039;details&#039;</code> form group is made into a collapsed form group with the addition of a few attributes.</p>
+<p>All groups/elements are been built into the master <code>$form</code> array by the builder function.</p>
+<p>The <code>drupal_get_form</code> function is the &quot;key&quot; function in the Forms API. Note that in its basic usage, it takes just one argument, a string which
+is both the form ID and also the name of the function that builds the <code>$form</code> array. Because the form ID is generally also the name of a function, it must be a valid PHP variable name. It should start with a letter or underscore, followed by any number of letters, numbers, or underscores; spaces and hyphens are not allowed. <code>drupal_get_form</code> can take optional additional arguments, which will be simply passed on to the <code>$form</code> builder function.</p>
+
+
+<code>drupal_get_form</code> does the following:</p>
+<ul>
+  <li>Starts the entire form-building process by getting the  <code>$form</code> from the builder function</li>
+  <li>Translates the <code>$form['name']</code> items into actual form elements</li>
+  <li>Performs any validation and &quot;clean-up&quot; that needs to be done, and calls custom validation functions if declared</li>
+  <li>Submits the form if a submit function is declared, and the form has been submitted</li>
+  <li>Calls any custom theming functions that have been declared</li>
+  <li>Returns an HTML string which contains the actual form.</li>
+</ul>
+<p>For more detailed information, also see the API page for <code>drupal_get_form()</code></p>
+<p><em>An important thing to note:</em> notice that <code>$form[&#039;access&#039;]</code> has a <code>&#039;#tree&#039; =&gt; TRUE</code> attribute. this setting retains the full tree structure for all elements under it when it is passed to <code>$form_state['values']</code>. you must explicitly declare this anywhere you wish to retain an array's full hierarchy when it is passed.</p>
+
+<h2>Theming Forms</h2>
+<p>The API makes custom theming of all forms (including those found in core) possible. This custom theming becomes possible when all hard coded theming elements have been abstracted, so that they can be overridden at time of form generation. The abstraction is accomplished using one of the following methods:</p>
+<ol>
+  <li>Adding <code>'#theme'</code> attributes to the form and/or elements. This allows you to specify which theme function will be used to render the form or elements, overriding the default theming function.</li>
+  <li>Including any markup directly as an element in the $form array:
+    <ul>
+      <li>There are <code>&#039;#prefix&#039;</code> and <code>&#039;#suffix&#039;</code> attributes, and these will place the declared markup either before or after the form element in question. for example:
+        <div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+          $form</font><font color="#007700">[</font><font color="#DD0000">'access'</font><font color="#007700">] = array(</font><font color="#DD0000"><br />
+&nbsp;          '#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'fieldset'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;'#title' </font><font color="#007700">=&gt; </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Access log settings'</font><font color="#007700">), </font><font color="#DD0000"><br />
+&nbsp;&nbsp;'#prefix' </font><font color="#007700">=&gt; </font><font color="#DD0000">'&lt;div class=&quot;foo&quot;&gt;'</font><font color="#007700">, </font><font color="#DD0000"><br />
+&nbsp;&nbsp;'#suffix' </font><font color="#007700">=&gt; </font><font color="#DD0000">'&lt;/div&gt;',<br />
+</font><font color="#007700">);<br />
+          </font><font color="#0000BB">?&gt;</font> </font> </code></div>
+        <p>...will place the div tags before and after the entire form group (meaning the form elements of the group will also be enclosed in the div). if you were to put those attributes in one of the form elements inside that form group, then they would only wrap that particular element, etc.</p>
+      </li>
+      <li>There is a <code>&#039;#markup&#039;</code> type which you can place anywhere in the form, and its value will be output directly in its specified location in the forms hierarchy when the form is rendered. example:<br />
+        <br />
+        <div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+          $form</font><font color="#007700">[</font><font color="#DD0000">'div_tag'</font><font color="#007700">] = array(</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'markup'</font><font color="#007700">, </font><font color="#DD0000">'#value' </font><font color="#007700">=&gt; </font><font color="#DD0000">'&lt;div class=&quot;foo&quot;&gt;'</font><font color="#007700">);<br />
+          </font><font color="#0000BB">?&gt;</font> </font> </code></div>
+        <p>This markup form element can then be accessed/altered through its name in the array, 'div_tag'</p>
+        <p><em>NOTE:</em> it's not necessary to explicitly declare the type as markup, since type will default to markup if none is declared.</p>
+      </li>
+    </ul>
+  </li>
+  <li>Break out any markup into a separate theme function. This is the preferred method if the markup has any degree of complication. it is accomplished by creating a theme function with <em>theme_</em> prepended to the name of the form ID that is to be themed. in cases where you want to use the same theming function for more than one form, you can include the optional callback arg in <code>drupal_get_form</code>--in which case the third arg of <code>drupal_get_form</code> will be a string containing the name of the callback function which the form building code will call, and the theming function will be <em>theme_</em> prepended to the name of the callback.
+    <p>example:</p>
+    <p>For our above form, we could create a custom theming function as follows:</p>
+    <div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+      </font><font color="#007700">function </font><font color="#0000BB">theme_test_form</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">) {<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">= </font><font color="#DD0000">''</font><font color="#007700">;<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#0000BB">drupal_render</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'name'</font><font color="#007700">]);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#DD0000">'&lt;div class=&quot;foo&quot;&gt;'</font><font color="#007700">;<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#0000BB">drupal_render</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'access'</font><font color="#007700">]);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#DD0000">'&lt;div class=&quot;bar&quot;&gt;'</font><font color="#007700">;<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#0000BB">drupal_render</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">[</font><font color="#DD0000">'details'</font><font color="#007700">]);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#DD0000">'&lt;/div&gt;&lt;/div&gt;'</font><font color="#007700">;<br />
+&nbsp;&nbsp;</font><font color="#0000BB">$output </font><font color="#007700">.= </font><font color="#0000BB">drupal_render</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">);<br />
+&nbsp;&nbsp;return </font><font color="#0000BB">$output</font><font color="#007700">;<br />
+      }<br />
+    </font><font color="#0000BB">?&gt;</font> </font> </code></div>
+    <p>A few things to note:</p>
+    <ol>
+      <li>The theme function has one argument, which is the form array that it will theme</li>
+      <li>You build and return an output string just as you would do in a regular theming function</li>
+      <li>Form elements are rendered using the <code>drupal_render</code> function</li>
+      <li>If you call <code>drupal_render</code> and pass it an array of elements (as in a fieldset), it will render all the elements in the passed array, in the order in which they were built in the form array.</li>
+      <li>While the default order of rendering for a form is the order in which it was built, you can override that in the theme function by calling <code>drupal_render</code> for any element in the place where you would like it to be rendered. In the above example, this was done with <code>$form[&#039;name&#039;]</code>.</li>
+      <li>The rendering code keeps track of which elements have been rendered, and will only allow them to be rendered once. Notice that <code>drupal_render</code> is called for the entire form array at the very end of the theming function, but it will only render the remaining unrendered element, which in this case is the submit button. calling <code>drupal_render($form)</code> is a common way to end a theming function, as it will then render any submit buttons and/or hidden fields that have been declared in the form in a single call.</li>
+    </ol>
+  </li>
+</ol>
+
+<h2>Validating Forms</h2>
+<p>The form API has general form validation which it performs on all submitted forms. If there is additional validation you wish to perform on a submitted form, you can create a validation function. the name of the validation function is the form ID with <em>_validate</em> appended to it. the function has two args: <code>$form</code> and <code>$form_state</code>. <code>$form</code> is the form array of the executed form, and <code>$form_state['values']</code> contains the form values which you may perform validation on.  (Note - in more advanced usage, several forms may share a _validate or _submit function - so if the form's ID is needed, it can be retrieved from <code>$form['form_id']['#value']</code>, or <code>$form_state['values']['form_id']</code>.)</p>
+<p>Here's an example validation function for our example code:</p>
+<div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+  </font><font color="#007700">function </font><font color="#0000BB">test_form_validate</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">, </font><font color="#0000BB">&amp;$form_state</font><font color="#007700">) {<br />
+&nbsp;&nbsp;if (</font><font color="#0000BB">$form_state['values']</font><font color="#007700">[</font><font color="#DD0000">'name'</font><font color="#007700">] == </font><font color="#DD0000">''</font><font color="#007700">) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#0000BB">form_set_error</font><font color="#007700">(</font><font color="#DD0000">''</font><font color="#007700">, </font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'You must select a name for this group of settings.'</font><font color="#007700">));<br />
+&nbsp;&nbsp;}<br />
+  }<br />
+</font><font color="#0000BB">?&gt;</font> </font> </code></div>
+<h2>Submitting Forms</h2>
+<p>The normal method of submitting forms with the API is through the use of a form submit function. This has the same naming convention and arguments as the validation function, except <em>_submit</em> is appended instead. Any forms which are submitted from a button of <code>type =&gt; &#039;submit&#039;</code> will be passed to their corresponding submit function if it is available. </p>
+<p>example:</p>
+<div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+  </font><font color="#007700">function </font><font color="#0000BB">test_form_submit</font><font color="#007700">(</font><font color="#0000BB">$form</font><font color="#007700">, </font><font color="#0000BB">&amp;$form_state</font><font color="#007700">) {<br />
+&nbsp;&nbsp;</font><font color="#0000BB">db_query</font><font color="#007700">(</font><font color="#DD0000">&quot;INSERT INTO {table} (name, log, hidden) VALUES ('%s', %d, '%s')&quot;</font><font color="#007700">, </font><font color="#0000BB">$form_state['values']</font><font color="#007700">[</font><font color="#DD0000">'name'</font><font color="#007700">], </font><font color="#0000BB">$form_state['values']</font><font color="#007700">[</font><font color="#DD0000">'access'</font><font color="#007700">][</font><font color="#DD0000">'log'</font><font color="#007700">],&nbsp;&nbsp;</font><font color="#0000BB">$form_state['values']</font><font color="#007700">[</font><font color="#DD0000">'hidden'</font><font color="#007700">]);<br />
+&nbsp;&nbsp;</font><font color="#0000BB">drupal_set_message</font><font color="#007700">(</font><font color="#0000BB">t</font><font color="#007700">(</font><font color="#DD0000">'Your form has been saved.'</font><font color="#007700">));<br />
+}<br/></font><font color="#0000BB">?&gt;</font> </font> </code></div>
+<p>a few things to note: </p>
+<ol>
+  <li>A submit function is called only if a submit button was present and exists in the $_POST, and validation did not fail.
+  </li>
+  <li>The <code>$form_state['values']</code> array will not usually have the same hierarchical structure as the constructed <code>$form</code> array (due to the flattening discussed previously), so be aware of what arrays have been flattened, and what arrays have retained their hierarchy by use of the <code>tree =&gt; TRUE</code> attribute. notice above that 'statistics_enable_access_log' belongs to a tree'd array, and the full array structure must be used to access the value.</li>
+  <li>If a form has a submit function, then hidden form values are not needed. Instead, any values that you need to pass to <code>$form_state['values']</code> can be declared in the <code>$form</code> array as such:<br />
+    <br />
+    <div class="codeblock"><code><font color="#000000"> <font color="#0000BB">&lt;?php<br />
+      $form</font><font color="#007700">[</font><font color="#DD0000">'foo'</font><font color="#007700">] = array(</font><font color="#DD0000">'#type' </font><font color="#007700">=&gt; </font><font color="#DD0000">'value'</font><font color="#007700">, </font><font color="#DD0000">'#value' </font><font color="#007700">=&gt; </font><font color="#DD0000">'bar'</font><font color="#007700">)<br />
+    </font><font color="#0000BB">?&gt;</font> </font> </code></div>
+    <p>This is accessed in <code>$form_state['values'][&#039;foo&#039;]</code>, with a value of <em>bar</em>. This method is preferred because the values are not sent to the browser.</p>
+  </li>
+  <li>To determine where the user should be sent after the form is processed, the _submit function can place a path or URL in <code>$form_state['redirect']</code> which will be the target of a drupal_goto; every form is redirected after a submit. If you store nothing in <code>$form_state['redirect']</code>, the form will simply be redirected to itself after a submit. It is polite to use <code><font color="#0000BB">drupal_set_message()</font></code> to explain to the user that the submission was successful.
+  </li>
+</ol>
+
+<h2>Understanding the Flow</h2>
+<p>An important concept with Forms API compared to using raw HTML forms (as in Drupal 4.6 and before) is that the <code><font color="#0000BB">drupal_get_form()</font></code> function handles both presenting and responding to the form. What this means is that the $form array you construct in your function will be built first when the form is presented, and again when the form is submitted.</p>
+<p>The practical upshot to this is that many developers immediately find themselves asking the question of <em>"where does my data get stored?"</em>. The answer is simply that it doesn't. You put your $form data together, perhaps loading your object from the database and filling in #default_values, the form builder then checks this against what was posted. What you gain from this, however, is that the FormsAPI can deal with your data securely. Faking a POST is much harder since it won't let values that weren't actually on the form come through to the $form_state['values'] in your submit function, and in your 'select' types, it will check to ensure that the value actually existed in the select and reject the form if it was not. In addition, Drupal adds, by default, a security token to each form that will protect against cross-site forgery.
+</body>
+</html>
