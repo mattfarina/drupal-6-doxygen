@@ -28,8 +28,7 @@
  *   - @link nodeapi_example.module How to extend existing content types @endlink
  *   - @link page_example.module How to define pages @endlink
  * - In-depth discussions
- *   - @link forms_api.html Forms API Quickstart Guide @endlink
- *   - @link forms_api_reference.html Forms API Reference @endlink
- *   - @link javascript_startup_guide.html JavaScript Startup Guide @endlink
- *   - @link http://drupal.org/node/547518 Drupal Programming from an Object-Oriented Perspective @endlink
+ *   - <a href="http://drupal.org/node/751826">Forms API Quickstart Guide</a>
+ *   - <a href="http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/6">Forms API Reference</a>
+ *   - <a href="http://drupal.org/node/547518">Drupal Programming from an Object-Oriented Perspective</a>
  */
