@@ -6,7 +6,7 @@ This package provides everything Doxygen needs to generate API documentation for
 
 Generating API documentation for Drupal is easy with these quick steps.
 
-  * From the command link execute `doxygen drupal.doxy`. This will generate the documentation andput it in the new directory docs/html.
+  * From the command line execute `doxygen drupal.doxy`. This will generate the documentation andput it in the new directory docs/html.
   * Open up your browser to docs/html/index.html
 
 It's that simple.
